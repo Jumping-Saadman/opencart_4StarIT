@@ -1,7 +1,128 @@
 <style>
-  .col {
-    background-color: #490dc1;
+  .col h1, h2 {
+    display: none;
   }
+
+  .account-container {
+    display: block;
+    width: 850px;
+    height: 395px;
+    max-width: 850px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .top-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 86px;
+    background-color: rgba(31, 31, 31, 1);
+    border-radius: 16px 16px 0 0;
+    padding: 5px 0 5px 0;
+  }
+
+  .account-action {
+    margin: auto;
+    padding: 10px 0;
+    display: flex;
+    width: 700px;
+    height: 46px;
+    background-color: rgba(31, 31, 31, 1);
+  }
+
+  .action-profile {
+    width: 30px;
+    height: 30px;
+    background-image: url('image/profile.png'); /* Specify the image path */
+    background-size: cover; /* Adjust image size to cover the element */
+    background-repeat: no-repeat; /* Prevent image repetition */
+    background-position: center; /* Center the image */
+  }
+
+  .action-logout {
+    width: 30px;
+    height: 30px;
+    background-image: url('image/State=Hover.png'); /* Specify the image path */
+    background-size: cover; /* Adjust image size to cover the element */
+    background-repeat: no-repeat; /* Prevent image repetition */
+    background-position: center; /* Center the image */
+    margin-left: auto;
+  }
+
+  .account-inner-container {
+    display: block;
+    width: 810px;
+    height: 355px;
+    padding: 10px 0;
+    background-color: #ffffff;
+    margin: 20px auto;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .account-flex {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 3px 40px;
+    width: 810px;
+    height: 355px;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+  .account-flex .list-unstyled {
+    display: flex;
+    margin: 0;
+    gap: 8px;
+  }
+
+  .account-flex .list-unstyled li {
+    display: block;
+
+  }
+  .account-flex .list-unstyled li a {
+    display: block;
+    padding: 12px 20px;
+    background: #fcfdfd;
+    color: #000000;
+    border-radius: 15px;
+    border-color: #0e0f0f;
+    
+    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+    width: 171px;
+    height: 165px;
+    gap: 20px;
+
+    background-image: url('image/State=Default.png'); /* Specify the image path */
+    background-size: cover; /* Adjust image size to cover the element */
+    background-repeat: no-repeat; /* Prevent image repetition */
+    background-position: center; /* Center the image */
+    
+  }
+
+/*  #edit_profile {
+    background-image: url('image/photo-1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  } */
+
+  #unwanted_items {
+    display: none;
+  }
+
+  .account-flex .list-unstyled .affiliate ul {
+    display: none;
+  }
+
 </style>
 
 {{ header }}
@@ -16,40 +137,52 @@
   {% endif %}
   <div class="row">{{ column_left }}
     <div id="content" class="col">{{ content_top }}
-      <h1>{{ text_my_account }}</h1>
-      <ul class="list-unstyled">
-        <li><a href="{{ edit }}">{{ text_edit }}</a></li>
-        <li><a href="{{ password }}">{{ text_password }}</a></li>
-        <li><a href="{{ payment_method }}">{{ text_payment_method }}</a></li>
-        <li><a href="{{ address }}">{{ text_address }}</a></li>
-        <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
-      </ul>
-      <h2>{{ text_my_orders }}</h2>
-      <ul class="list-unstyled">
-        <li><a href="{{ order }}">{{ text_order }}</a></li>
-        <li><a href="{{ subscription }}">{{ text_subscription }}</a></li>
-        <li><a href="{{ download }}">{{ text_download }}</a></li>
-        {% if reward %}
-          <li><a href="{{ reward }}">{{ text_reward }}</a></li>
-        {% endif %}
-        <li><a href="{{ return }}">{{ text_return }}</a></li>
-        <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
-      </ul>
-      {% if affiliate %}
-        <h2>{{ text_my_affiliate }}</h2>
-        <ul class="list-unstyled">
-          {% if not tracking %}
-            <li><a href="{{ affiliate }}">{{ text_affiliate_add }}</a></li>
-          {% else %}
-            <li><a href="{{ affiliate }}">{{ text_affiliate_edit }}</a></li>
-            <li><a href="{{ tracking }}">{{ text_tracking }}</a></li>
-          {% endif %}
-        </ul>
-      {% endif %}
-      <h2>{{ text_my_newsletter }}</h2>
-      <ul class="list-unstyled">
-          <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
-      </ul>
+      <div class="account-container">
+        <div class="top-bar">
+          <div class="account-action">
+            <div class="action-profile"></div>
+            <div class="action-logout"></div>
+          </div>
+        </div>
+        <div class="account-inner-container">
+          <div class="account-flex">
+            <h1>{{ text_my_account }}</h1>
+            <ul class="list-unstyled">
+              <li><a id="edit_profile" href="{{ edit }}">{{ text_edit }}</a></li>
+              <li><a id="change_password" href="{{ password }}">{{ text_password }}</a></li>
+              <li id="unwanted_items"><a href="{{ payment_method }}">{{ text_payment_method }}</a></li>
+              <li><a id="modify_address" href="{{ address }}">{{ text_address }}</a></li>
+              <li><a id="modify_wishlist" href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+            </ul>
+            <h2>{{ text_my_orders }}</h2>
+            <ul class="list-unstyled">
+              <li><a id="view_order" href="{{ order }}">{{ text_order }}</a></li>
+              <li><a id="view_subscription" href="">{{ text_subscription }}</a></li>
+              <li><a id="view_downloads" href="">{{ text_download }}</a></li>
+              {% if reward %}
+                <li id="unwanted_items"><a href="">{{ text_reward }}</a></li>
+              {% endif %}
+              <li><a id="view_returns" href="">{{ text_return }}</a></li>
+              <li id="unwanted_items"><a href="">{{ text_transaction }}</a></li>
+            </ul>
+            {% if affiliate %}
+              <h2>{{ text_my_affiliate }}</h2>
+              <ul class="list-unstyled affiliate">
+                {% if not tracking %}
+                  <li id="unwanted_items"><a href="{{ affiliate }}">{{ text_affiliate_add }}</a></li>
+                {% else %}
+                  <li id="unwanted_items"><a href="{{ affiliate }}">{{ text_affiliate_edit }}</a></li>
+                  <li id="unwanted_items"><a href="{{ tracking }}">{{ text_tracking }}</a></li>
+                {% endif %}
+              </ul>
+            {% endif %}
+            <h2>{{ text_my_newsletter }}</h2>
+            <ul class="list-unstyled">
+                <li><a id="subscribe_newsletter" href="{{ newsletter }}">{{ text_newsletter }}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
       {{ content_bottom }}</div>
     {{ column_right }}</div>
 </div>
