@@ -86,13 +86,26 @@
 
   }
   .account-flex .list-unstyled li a {
-    display: block;
+    /* font-family: Montserrat; */
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 16px;
+    /* leading-trim: NONE; */
+    line-height: 100%;
+    letter-spacing: 0%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 12px 20px;
     background: #fcfdfd;
     color: #000000;
     border-radius: 15px;
     border-color: #0e0f0f;
     
+    box-shadow: 0px 1px 4.5px 0px rgba(0, 0, 0, 0.25) inset;
+
     text-align: center;
     text-decoration: none;
     font-weight: 500;
@@ -100,20 +113,16 @@
     width: 171px;
     height: 165px;
     gap: 20px;
-
-    background-image: url('image/State=Default.png'); /* Specify the image path */
-    background-size: cover; /* Adjust image size to cover the element */
-    background-repeat: no-repeat; /* Prevent image repetition */
-    background-position: center; /* Center the image */
-    
   }
 
-/*  #edit_profile {
-    background-image: url('image/photo-1.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  } */
+  @keyframes slideIn {
+        from { box-shadow: inset; }
+        to { box-shadow: none; }
+    }
+
+  .account-flex .list-unstyled li a:hover {
+    animation: slideIn 600ms ease-out forwards;
+  }
 
   #unwanted_items {
     display: none;
@@ -121,6 +130,10 @@
 
   .account-flex .list-unstyled .affiliate ul {
     display: none;
+  }
+
+  #newsletter {
+    all: unset;
   }
 
 </style>
@@ -148,22 +161,22 @@
           <div class="account-flex">
             <h1>{{ text_my_account }}</h1>
             <ul class="list-unstyled">
-              <li><a id="edit_profile" href="{{ edit }}">{{ text_edit }}</a></li>
-              <li><a id="change_password" href="{{ password }}">{{ text_password }}</a></li>
-              <li id="unwanted_items"><a href="{{ payment_method }}">{{ text_payment_method }}</a></li>
-              <li><a id="modify_address" href="{{ address }}">{{ text_address }}</a></li>
-              <li><a id="modify_wishlist" href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+              <li><a id="edit_profile" href="{{ edit }}"><img src="image/State=Default.png" alt="Default">{{ text_edit }}</a></li>
+              <li><a id="change_password" href="{{ password }}"><img src="image/State=Default.png" alt="Default">{{ text_password }}</a></li>
+              <li id="unwanted_items"><a href="{{ payment_method }}"><img src="image/State=Default.png" alt="Default">{{ text_payment_method }}</a></li>
+              <li><a id="modify_address" href="{{ address }}"><img src="image/State=Default.png" alt="Default">{{ text_address }}</a></li>
+              <li><a id="modify_wishlist" href="{{ wishlist }}"><img src="image/State=Default.png" alt="Default">{{ text_wishlist }}</a></li>
             </ul>
             <h2>{{ text_my_orders }}</h2>
             <ul class="list-unstyled">
-              <li><a id="view_order" href="{{ order }}">{{ text_order }}</a></li>
-              <li><a id="view_subscription" href="">{{ text_subscription }}</a></li>
-              <li><a id="view_downloads" href="">{{ text_download }}</a></li>
+              <li><a id="view_order" href="{{ order }}"><img src="image/State=Default.png" alt="Default">{{ text_order }}</a></li>
+              <li><a id="view_subscription" href=""><img src="image/State=Default.png" alt="Default">{{ text_subscription }}</a></li>
+              <li><a id="view_downloads" href=""><img src="image/State=Default.png" alt="Default">{{ text_download }}</a></li>
               {% if reward %}
                 <li id="unwanted_items"><a href="">{{ text_reward }}</a></li>
               {% endif %}
-              <li><a id="view_returns" href="">{{ text_return }}</a></li>
-              <li id="unwanted_items"><a href="">{{ text_transaction }}</a></li>
+              <li><a id="view_returns" href=""><img src="image/State=Default.png" alt="Default">{{ text_return }}</a></li>
+              <li id="unwanted_items"><a href=""><img src="image/State=Default.png" alt="Default">{{ text_transaction }}</a></li>
             </ul>
             {% if affiliate %}
               <h2>{{ text_my_affiliate }}</h2>
@@ -177,8 +190,8 @@
               </ul>
             {% endif %}
             <h2>{{ text_my_newsletter }}</h2>
-            <ul class="list-unstyled">
-                <li><a id="subscribe_newsletter" href="{{ newsletter }}">{{ text_newsletter }}</a></li>
+            <ul class="list-unstyled" id="newsletter">
+                <li><a id="subscribe_newsletter" href="{{ newsletter }}"><img src="image/State=Default.png" alt="Default">{{ text_newsletter }}</a></li>
             </ul>
           </div>
         </div>
