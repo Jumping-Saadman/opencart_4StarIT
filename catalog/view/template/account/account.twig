@@ -44,13 +44,33 @@
   }
 
   .action-logout {
+    width: 88px;
+    height: 20px;
+    margin-left: auto;
+  }
+
+  .action-logout a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .action-logout img {
     width: 30px;
     height: 30px;
-    background-image: url('image/State=Hover.png'); /* Specify the image path */
-    background-size: cover; /* Adjust image size to cover the element */
-    background-repeat: no-repeat; /* Prevent image repetition */
-    background-position: center; /* Center the image */
     margin-left: auto;
+  }
+
+  .action-logout h6 {
+    /* font-family: Montserrat; */
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 14px;
+    /* leading-trim: CAP_HEIGHT; */
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #ffffff;
   }
 
   .account-inner-container {
@@ -67,10 +87,10 @@
   .account-flex {
     display: flex;
     flex-wrap: wrap;
+    row-gap: 6px;
     padding: 3px 40px;
     width: 810px;
     height: 355px;
-    gap: 24px;
     justify-content: center;
     align-items: center;
     margin: auto;
@@ -154,7 +174,17 @@
         <div class="top-bar">
           <div class="account-action">
             <div class="action-profile"></div>
-            <div class="action-logout"></div>
+            <div class="action-text">
+              <h6>Welcome Back,</h6>
+              <h1>Sourav Basak</h1>
+            </div>
+            
+            <div class="action-logout">
+              <a href="">
+                <img src="image\State=Hover.png" alt="logout">
+                <h6>Log out</h6>
+              </a>
+            </div>
           </div>
         </div>
         <div class="account-inner-container">
