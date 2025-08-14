@@ -27,20 +27,42 @@
 
   .account-action {
     margin: auto;
-    padding: 10px 0;
     display: flex;
     width: 700px;
     height: 46px;
     background-color: rgba(31, 31, 31, 1);
+    justify-content: center;
+    align-items: center;
   }
 
-  .action-profile {
-    width: 30px;
-    height: 30px;
-    background-image: url('image/profile.png'); /* Specify the image path */
-    background-size: cover; /* Adjust image size to cover the element */
-    background-repeat: no-repeat; /* Prevent image repetition */
-    background-position: center; /* Center the image */
+  .account-action img {
+    width: 46px;
+    height: 46px;
+    margin-left: 20px;
+  }
+
+  .col .action-text {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+
+  .action-text h6 {
+    color: rgba(177, 177, 177, 1);
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 100%;
+    margin-bottom: 0;
+  }
+
+  .col .action-text h1 {
+    display: block;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 100%;
+    margin-bottom: 0;
   }
 
   .action-logout {
@@ -173,12 +195,11 @@
       <div class="account-container">
         <div class="top-bar">
           <div class="account-action">
-            <div class="action-profile"></div>
+            <img src="image\profile.png" alt="profile">
             <div class="action-text">
               <h6>Welcome Back,</h6>
               <h1>Sourav Basak</h1>
             </div>
-            
             <div class="action-logout">
               <a href="">
                 <img src="image\State=Hover.png" alt="logout">
