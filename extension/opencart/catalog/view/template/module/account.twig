@@ -1,25 +1,145 @@
-<div class="list-group mb-3">
-  {% if not logged %}
-    <a href="{{ login }}" class="list-group-item">{{ text_login }}</a>
-    <a href="{{ register }}" class="list-group-item">{{ text_register }}</a>
-    <a href="{{ forgotten }}" class="list-group-item">{{ text_forgotten }}</a>
-  {% endif %}
-  <a href="{{ account }}" class="list-group-item">{{ text_account }}</a>
-  {% if logged %}
-    <a href="{{ edit }}" class="list-group-item">{{ text_edit }}</a>
-    <a href="{{ password }}" class="list-group-item">{{ text_password }}</a>
-  {% endif %}
-  <a href="{{ payment_method }}" class="list-group-item">{{ text_payment_method }}</a>
-  <a href="{{ address }}" class="list-group-item">{{ text_address }}</a>
-  <a href="{{ wishlist }}" class="list-group-item">{{ text_wishlist }}</a>
-  <a href="{{ order }}" class="list-group-item">{{ text_order }}</a>
-  <a href="{{ download }}" class="list-group-item">{{ text_download }}</a>
-  <a href="{{ subscription }}" class="list-group-item">{{ text_subscription }}</a>
-  <a href="{{ reward }}" class="list-group-item">{{ text_reward }}</a>
-  <a href="{{ return }}" class="list-group-item">{{ text_return }}</a>
-  <a href="{{ transaction }}" class="list-group-item">{{ text_transaction }}</a>
-  <a href="{{ newsletter }}" class="list-group-item">{{ text_newsletter }}</a>
-  {% if logged %}
-    <a href="{{ logout }}" class="list-group-item">{{ text_logout }}</a>
-  {% endif %}
+<style>
+.sidebar {
+  background: #1a1a1a;
+    min-height: 100%;
+    padding: 2rem 1.5rem;
+    color: white;
+    width: 280px;
+    flex-shrink: 0;
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    background: #4a5568;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 2rem;
+    color: white;
+}
+
+.profile-info h3 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.welcome-text {
+    color: #a0aec0;
+    font-size: 0.875rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    margin-bottom: 0.5rem;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    color: #a0aec0;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 0.95rem;
+}
+.nav-link i {
+    margin-right: 0.75rem;
+    width: 16px;
+    font-size: 0.875rem;
+}
+
+.nav-link:hover {
+    background: #FFBB00;
+    color: white;
+}
+
+.nav-link.active {
+    background: #FFBB00;
+    color: #1a202c;
+    font-weight: 500;
+}
+
+.logout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 15px; 
+}
+.logout-btn {
+  color: white;
+  padding-right:20px; 
+}
+.logout-btn .fa-sign-out {
+  color: #FFBB00; 
+}
+
+
+</style>
+
+
+<div class="sidebar">
+    <div class="profile-section">
+        <div class="profile-avatar">
+            <i class="fa-solid fa-user"></i>
+        </div>
+        {% if logged %}
+        <div class="profile-info">
+            <div class="welcome-text">Welcome Back,</div>
+            <h3>{{ firstname }} {{ lastname }}</h3>
+        </div>
+        {% else %}
+        <div class="profile-info">
+            <div class="welcome-text">Welcome, Guest</div>
+        </div>
+        {% endif %}
+    </div>
+
+    <nav class="sidebar-nav">
+        {% if not logged %}
+            <div class="nav-item"><a href="{{ login }}" class="nav-link"><i class="fa-solid fa-sign-in-alt"></i> {{ text_login }}</a></div>
+            <div class="nav-item"><a href="{{ register }}" class="nav-link"><i class="fa-solid fa-user-plus"></i> {{ text_register }}</a></div>
+            <div class="nav-item"><a href="{{ forgotten }}" class="nav-link"><i class="fa-solid fa-key"></i> {{ text_forgotten }}</a></div>
+        {% endif %}
+
+        <div class="nav-item"><a href="{{ account }}" class="nav-link"><i class="fa-solid fa-user"></i> {{ text_account }}</a></div>
+
+        {% if logged %}
+            <div class="nav-item"><a href="{{ edit }}" class="nav-link"><i class="fa-solid fa-user-edit"></i> {{ text_edit }}</a></div>
+            <div class="nav-item"><a href="{{ password }}" class="nav-link"><i class="fa-solid fa-lock"></i> {{ text_password }}</a></div>
+        {% endif %}
+
+        <div class="nav-item"><a href="{{ payment_method }}" class="nav-link"><i class="fa-solid fa-credit-card"></i> {{ text_payment_method }}</a></div>
+        <div class="nav-item"><a href="{{ address }}" class="nav-link"><i class="fa-solid fa-location-dot"></i> {{ text_address }}</a></div>
+        <div class="nav-item"><a href="{{ wishlist }}" class="nav-link"><i class="fa-solid fa-heart"></i> {{ text_wishlist }}</a></div>
+        <div class="nav-item"><a href="{{ order }}" class="nav-link"><i class="fa-solid fa-box"></i> {{ text_order }}</a></div>
+        <div class="nav-item"><a href="{{ download }}" class="nav-link"><i class="fa-solid fa-download"></i> {{ text_download }}</a></div>
+        <div class="nav-item"><a href="{{ subscription }}" class="nav-link"><i class="fa-solid fa-bell"></i> {{ text_subscription }}</a></div>
+        <div class="nav-item"><a href="{{ reward }}" class="nav-link"><i class="fa-solid fa-gift"></i> {{ text_reward }}</a></div>
+        <div class="nav-item"><a href="{{ return }}" class="nav-link"><i class="fa-solid fa-undo"></i> {{ text_return }}</a></div>
+        <div class="nav-item"><a href="{{ transaction }}" class="nav-link"><i class="fa-solid fa-exchange-alt"></i> {{ text_transaction }}</a></div>
+        <div class="nav-item"><a href="{{ newsletter }}" class="nav-link"><i class="fa-solid fa-envelope"></i> {{ text_newsletter }}</a></div>
+
+        {% if logged %}
+            <div class="logout-container">
+                <a href="{{ logout }}" class="logout-btn">
+                    <i class="fa fa-sign-out"></i> {{ text_logout }}
+                </a>
+            </div>
+        {% endif %}
+    </nav>
 </div>
