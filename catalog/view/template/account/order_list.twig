@@ -34,6 +34,9 @@
   border-collapse: collapse;
 }
 
+.table thead {
+  display: none;
+}
 .table-row {
   transition: background-color 0.2s ease;
 }
@@ -75,7 +78,7 @@
 .horizontal-line {
   width: 100%;
   height: 1px;
-  background-color: #e5e7eb;
+  background-color: #0a0a0a;
   margin-top: 1rem;
 }
 
@@ -173,71 +176,57 @@
       <h1>{{ heading_title }}</h1>
       {% if orders %}
         <div class="container">
-        <div class="table-wrapper">
-          <table>
-            <!-- <thead>
-              <tr>
-                <th class="text-end">{{ column_order_id }}</th>
-                <th class="text-end">{{ column_product_total }}</th>
-                <th>{{ column_status }}</th>
-                <th class="text-end">{{ column_total }}</th>
-                <th>{{ column_date_added }}</th>
-                <th></th>
-              </tr>
-            </thead> -->
-            <tbody>
-              {% for order in orders %}
-                  <!-- <tr>
-                    <div class="order-top">
-                      <td class="text-end">#{{ order.order_id }}</td>
-                      <td>{{ order.date_added }}</td>
-                    </div>
-                    <div class="order-bottom">
-                      <td class="text-end">{{ order.product_total }}</td>
-                      <td>{{ order.status }}</td>
-                      <td class="text-end">{{ order.total }}</td>
-                      <td class="text-end"><a href="{{ order.view }}" data-bs-toggle="tooltip" title="{{ button_view }}" class="btn btn-info"><i class="fa-solid fa-eye"></i></a></td>
-                    </div>
-                  </tr> -->
-                  <tr className="table-row">
-                    <td className="table-cell">
-                      <div className="content-wrapper">
-                        {/* Order Header */}
-                        <div className="order-header">
-                          <h3 className="order-title">{{ order.order_id }}</h3>
-                          <p className="order-date">{{ order.date_added }}</p>
-                          <div className="horizontal-line"></div>
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="text-end">{{ column_order_id }}</th>
+                  <th class="text-end">{{ column_product_total }}</th>
+                  <th>{{ column_status }}</th>
+                  <th class="text-end">{{ column_total }}</th>
+                  <th>{{ column_date_added }}</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for order in orders %}
+                  <tr class="table-row">
+                    <td class="table-cell">
+                      <div class="content-wrapper">
+                        <div class="order-header">
+                          <h3 class="order-title">{{ order.order_id }}</h3>
+                          <p class="order-date">{{ order.date_added }}</p>
+                          <div class="horizontal-line"></div>
                         </div>
 
-                        {/* Product Details */}
-                        <div className="product-details">
-                          <div className="product-image">
-                            <div className="product-image-placeholder"></div>
+                        <div class="product-details">
+                          <div class="product-image">
+                            <div class="product-image-placeholder"></div>
                           </div>
 
                           <div>
-                            <h4 className="product-name">BenQ PhotoVue SW272Q 27" QHD IPS Monitor</h4>
+                            <h4 class="product-name">BenQ PhotoVue SW272Q 27" QHD IPS Monitor</h4>
                           </div>
 
-                          <div className="product-price">
+                          <div class="product-price">
                             <span>BDT 99,000</span>
                           </div>
 
-                          <div className="status-wrapper">
-                            <span className="status-badge">{{ order.status }}</span>
+                          <div class="status-wrapper">
+                            <span class="status-badge">{{ order.status }}</span>
                           </div>
 
-                          <div className="action-wrapper">
-                            <button className="view-button"><a href="{{ order.view }}"></a></button>
+                          <div class="action-wrapper">
+                            <button class="view-button"><a href="{{ order.view }}"></a></button>
                           </div>
                         </div>
                       </div>
                     </td>
                   </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="row mb-3">
           <div class="col-sm-6 text-start">{{ pagination }}</div>
