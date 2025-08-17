@@ -4,12 +4,16 @@
   flex-wrap: nowrap;
   background-color: #ffffff;
   border-radius: 15px;
+  width: 100%;
 }
-
 
 .col {
   width: auto;
   padding: 20px;
+}
+
+.heading-title {
+  color: rgba(255, 187, 0, 1);
 }
 
 .container-table {
@@ -98,10 +102,17 @@
 }
 
 .product-image-placeholder {
-  width: 2rem;
-  height: 2rem;
+  width: 10px;
+  height: 10px;
+  
   background-color: #d1d5db;
-  border-radius: 0.25rem;
+  border-radius: 5px;
+}
+
+.product-image-placeholder img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: fill;
 }
 
 .product-name {
@@ -192,7 +203,7 @@
 </style>
 
 {{ header }}
-<div id="account-order" class="container">
+<div id="account-order" class="container-main-content">
   <ul class="breadcrumb">
     {% for breadcrumb in breadcrumbs %}
       <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
@@ -201,7 +212,7 @@
   <div class="row">
     {{ column_left }}
     <div id="content" class="col">{{ content_top }}
-      <h1>{{ heading_title }}</h1>
+      <h1 class="heading-title">{{ heading_title }}</h1>
       {% if orders %}
         <div class="container-table">
           <div class="table-wrapper">
@@ -222,14 +233,14 @@
                     <td class="table-cell">
                       <div class="content-wrapper">
                         <div class="order-header">
-                          <h3 class="order-title">{{ order.order_id }}</h3>
-                          <p class="order-date">{{ order.date_added }}</p>
+                          <h3 class="order-title">Order #{{ order.order_id }}</h3>
+                          <p class="order-date">Date Added: {{ order.date_added }}</p>
                           
                         </div>
                         <div class="horizontal-line"></div>
                         <div class="product-details">
                           <div class="product-image">
-                            <div class="product-image-placeholder"></div>
+                            <div class="product-image-placeholder"><img src="image\placeholder.png" alt="placeholder"></div>
                           </div>
 
                           <div>
