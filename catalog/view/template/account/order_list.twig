@@ -5,18 +5,18 @@
     flex-wrap: nowrap;
     background-color: #ffffff;
     border-radius: 15px;
-    width: 90%;
+    width: 1024px;
     margin: auto;
     height: auto;
   }
 
   .row .sidebar-container {
-    width: 295px;
+    width: 290px;
 
   }
 
-  .col {
-    width: calc(100% - 295px);
+  .row .col {
+    width: calc(1024px - 290px);
     padding: 20px;
   }
 
@@ -25,7 +25,6 @@
   }
 
   .container-table {
-    padding: 2rem;
     max-width: 72rem;
     margin: 0 auto;
   }
@@ -89,14 +88,16 @@
     width: 100%;
     height: 1px;
     background-color: #b2b2b2;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 7px;
+    margin-bottom: 7px;
   }
 
   .product-details {
     display: flex;
     align-items: center;
     gap: 0;
+    justify-content: center;
+    text-align: center;
   }
 
   .product-details img {
@@ -104,8 +105,6 @@
     height: 4rem;
     background-color: #e5e7eb;
     border-radius: 0.5rem;
-    align-items: center;
-    justify-content: center;
   }
 
   .product-name {
@@ -113,16 +112,13 @@
     height: 20;
     gap: 10px;
     opacity: 1;
-    padding-top: 5px;
-    padding-right: 10px;
-    padding-bottom: 5px;
-    padding-left: 10px;
+    padding: 5px 5px;
 
     font-weight: 600;
     font-size: 14px;
     line-height: 112.00000000000001%;
     letter-spacing: 0.1px;
-
+    margin: 0;
   }
 
   .product-price {
@@ -132,10 +128,7 @@
     max-width: 105px;
     gap: 10px;
     opacity: 1;
-    padding-top: 5px;
-    padding-right: 10px;
-    padding-bottom: 5px;
-    padding-left: 10px;
+    padding: 5px 5px;
 
     font-weight: 600;
     font-size: 14px;
@@ -143,19 +136,18 @@
     letter-spacing: 0.1px;
 
     color: rgba(255, 187, 0, 1);
-  ;
-  }
-
-  .status-wrapper {
-    text-align: center;
   }
 
   .status-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.25rem 0.75rem;
+    width: 106.33332824707031;
+    height: 20;
+    max-width: 106.33px;
+    gap: 10px;
+    opacity: 1;
+    padding-top: 5px 5px;
+
     border-radius: 9999px;
-    font-size: 0.875rem;
+    font-size: 14px;
     font-weight: 500;
     color: rgba(1, 156, 66, 1);
   }
@@ -173,13 +165,24 @@
     border-radius: 40px;
     border-width: 2px;
 
-    border: 2px solid rgba(31, 31, 31, 1);
+    border: 3px solid rgba(31, 31, 31, 1);
     background-color: transparent;
-    color: #374151;
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
     transition: background-color 0.2s ease;
+
+    justify-content: center;
+    text-align: center;
+  }
+
+  .view-button a {
+    text-align: center;
+    text-decoration: none;
+    color: rgba(31, 31, 31, 1);
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: -0.23px;
+
   }
 
   .view-button:hover {
