@@ -8,8 +8,9 @@ $_['text_password']            = 'Your Password';
 $_['text_success']             = 'Success: Your password has been successfully updated.';
 
 // Entry
-$_['entry_password']           = 'Password';
-$_['entry_confirm']            = 'Password Confirm';
+$_['entry_old_password']       = 'Old Password';
+$_['entry_password']           = 'New Password';
+$_['entry_confirm']            = 'Confirm Password';
 
 // Error
 $_['error_token']              = 'Warning: Password token invalid!';
