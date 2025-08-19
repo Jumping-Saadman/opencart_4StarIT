@@ -8,6 +8,7 @@ $_['text_password']            = 'Your Password';
 $_['text_success']             = 'Success: Your password has been successfully updated.';
 
 // Entry
+$_['entry_pass_placeholder']   = 'Password';
 $_['entry_old_password']       = 'Old Password';
 $_['entry_password']           = 'New Password';
 $_['entry_confirm']            = 'Confirm Password';
