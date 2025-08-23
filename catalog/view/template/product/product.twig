@@ -1,3 +1,12 @@
+<style>
+  .row-big {
+    display: none;
+  }
+  .footer-view {
+    display: none;
+  }
+</style>
+
 {{ header }}
 <div id="product-info" class="container">
   <ul class="breadcrumb">
@@ -8,7 +17,7 @@
   <div class="row">{{ column_left }}
     <div id="content" class="col">
       {{ content_top }}
-      <div class="row mb-3">
+      <div class="row-big mb-3">
         {% if thumb or images %}
           <div class="col-sm">
             <div class="image magnific-popup">
@@ -348,4 +357,5 @@ $(document).ready(function() {
     });
 });
 //--></script>
-{{ footer }}
+<div class="footer-view">{{ footer }}</div>
+

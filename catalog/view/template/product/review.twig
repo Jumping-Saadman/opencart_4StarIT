@@ -1,3 +1,62 @@
+<style>
+  .reviews-container {
+      width: 898px;
+      height: 247px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    .reviews-title {
+      color: #f5a623;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .reviews-paragraph {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .review-section {
+      display: flex;
+      justify-content: space-between;
+    }
+    .write-review, .rating-section {
+      flex: 1;
+      margin-right: 20px;
+    }
+    .write-review input, .write-review textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f0f4f8;
+    }
+    .rating-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .rating-section label {
+      font-size: 16px;
+    }
+    .rating-section input[type="radio"] {
+      margin-right: 5px;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #f5a623;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background-color: #e5941e;
+    }
+</style>
+
 <form id="form-review">
   <div id="review">{{ list }}</div>
   <h2>{{ text_write }}</h2>
@@ -32,6 +91,30 @@
     <div class="text-end">
       <button type="submit" id="button-review" class="btn btn-primary">{{ button_continue }}</button>
     </div>
+
+
+
+    <div class="reviews-container">
+    <div class="reviews-title">Reviews (0)</div>
+    <div class="reviews-paragraph">Get specific details about this product from customers who own it.</div>
+    <div class="review-section">
+      <div class="write-review">
+        <input type="text" placeholder="Your Name *" required>
+        <input type="email" placeholder="Your Email *" required>
+        <textarea placeholder="Describe your review *" rows="4" required></textarea>
+      </div>
+      <div class="rating-section">
+        <label>Rating</label>
+        <input type="radio" name="rating" value="1"> Bad
+        <input type="radio" name="rating" value="2">
+        <input type="radio" name="rating" value="3">
+        <input type="radio" name="rating" value="4">
+        <input type="radio" name="rating" value="5"> Good
+        <button class="submit-btn">Submit</button>
+      </div>
+    </div>
+  </div>
+
   {% else %}
     {{ text_login }}
   {% endif %}
