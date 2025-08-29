@@ -1,16 +1,314 @@
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, sans-serif;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  #content {
+    width: 1220px;
+    max-width: 1220px;
+    height: 640px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    margin: auto;
+  }
+
+  #content::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle at 30% 40%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    );
+    pointer-events: none;
+  }
+
+  .error-section {
+    width: 382px;
+    height: 442px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .rotating-404 {
+    position: relative;
+    margin-bottom: 30px;
+  }
+
+  
+
+  .four-zero-four-number {
+    font-size: 120px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffd700, #ffa500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: rotate(3.21deg);
+    line-height: 1;
+    text-shadow: 0 8px 16px rgba(255, 165, 0, 0.3);
+    position: relative;
+  }
+
+  .error-title {
+    width: 179px;
+    height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .error-title h1 {
+    font-size: 42px;
+    font-weight: 800;
+    color: #2c3e50;
+    text-align: center;
+    line-height: 1.1;
+    letter-spacing: 2px;
+  }
+
+  .text-section {
+    width: 457px;
+    height: 93px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+
+  .error-message {
+    font-size: 18px;
+    color: #5a6c7d;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    width: 179px;
+    height: 41px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  .btn-primary:hover::before {
+    left: 100%;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(16, 185, 129, 0.4);
+    background: linear-gradient(135deg, #059669, #047857);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  /* Decorative elements */
+  .floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .shape {
+    position: absolute;
+    opacity: 0.1;
+  }
+
+  .shape-1 {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #ffd700, #ffa500);
+    border-radius: 50%;
+    top: 15%;
+    left: 10%;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .shape-2 {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, #10b981, #059669);
+    border-radius: 50%;
+    top: 20%;
+    right: 15%;
+    animation: float 8s ease-in-out infinite reverse;
+  }
+
+  .shape-3 {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+    border-radius: 50%;
+    bottom: 20%;
+    left: 8%;
+    animation: float 7s ease-in-out infinite;
+  }
+
+  .shape-4 {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #f59e0b, #d97706);
+    border-radius: 50%;
+    bottom: 25%;
+    right: 12%;
+    animation: float 9s ease-in-out infinite reverse;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(180deg);
+    }
+  }
+
+  /* Responsive design */
+  @media (max-width: 1280px) {
+    #content {
+      width: 90%;
+      max-width: 1220px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #content {
+      height: auto;
+      min-height: 640px;
+      padding: 40px 20px;
+    }
+
+    .error-section {
+      width: 100%;
+      height: auto;
+    }
+
+    .text-section {
+      width: 100%;
+      height: auto;
+      margin-top: 20px;
+    }
+
+    .four-zero-four-number {
+      font-size: 80px;
+    }
+
+    .error-title h1 {
+      font-size: 32px;
+    }
+  }
+</style>
+
 {{ header }}
 <div id="error-not-found" class="container">
   <ul class="breadcrumb">
     {% for breadcrumb in breadcrumbs %}
-    <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    <li class="breadcrumb-item">
+      <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+    </li>
     {% endfor %}
   </ul>
-  <div class="row">{{ column_left }}
-    <div id="content" class="col">{{ content_top }}
-      <h1>{{ heading_title }}</h1>
+  <div class="row">
+    {{ column_left }}
+    <div id="content" class="col">
+      {{ content_top }}
+      <!-- <h1>{{ heading_title }}</h1>
       <p>{{ text_error }}</p>
-      <div class="text-end"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
-      {{ content_bottom }}</div>
-    {{ column_right }}</div>
+      <div class="text-end"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div> -->
+
+      <div class="error-section">
+        <div class="four-zero-four-number">
+          404
+        </div>
+        <div class="error-title">ERROR</div>
+        
+      </div>
+
+      <div class="text-section">
+        <p class="error-message">
+          Sorry, we couldn't find the page you are looking for.
+        </p>
+        <div class="btn-container">
+          <a href="{{ continue }}" class="btn btn-primary">Back to Home</a>
+        </div>
+      </div>
+
+      {{ content_bottom }}
+    </div>
+
+    {{ column_right }}
+  </div>
 </div>
 {{ footer }}
