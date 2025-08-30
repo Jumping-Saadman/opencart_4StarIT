@@ -59,42 +59,31 @@
     z-index: 2;
   }
 
-  .rotating-404 {
+  .error-section img {
     position: relative;
-    margin-bottom: 30px;
-  }
+    width: 358.59423712636544px;
+height: 422.3355071128011px;
+  rotate: 3.21 deg;
+opacity: 1;
+top: -0px;
 
-  
+    height: auto;
+    margin-bottom: 20px;
+  }
 
   .four-zero-four-number {
-    font-size: 120px;
-    font-weight: 900;
-    background: linear-gradient(135deg, #ffd700, #ffa500);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    transform: rotate(3.21deg);
-    line-height: 1;
-    text-shadow: 0 8px 16px rgba(255, 165, 0, 0.3);
-    position: relative;
-  }
-
-  .error-title {
     width: 179px;
     height: 88px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-  }
-
-  .error-title h1 {
-    font-size: 42px;
-    font-weight: 800;
-    color: #2c3e50;
+    color: rgba(255, 187, 0, 1);
+    font-family: Montserrat;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 48px;
+    line-height: 92%;
+    letter-spacing: 0px;
     text-align: center;
-    line-height: 1.1;
-    letter-spacing: 2px;
+    position: relative;
+    bottom: 110px;
   }
 
   .text-section {
@@ -289,10 +278,10 @@
       <div class="text-end"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div> -->
 
       <div class="error-section">
+        <img src="image\error.png" alt="error">
         <div class="four-zero-four-number">
-          404
+          <p>404 Error</p>
         </div>
-        <div class="error-title">ERROR</div>
         
       </div>
 
@@ -311,4 +300,3 @@
     {{ column_right }}
   </div>
 </div>
-{{ footer }}
