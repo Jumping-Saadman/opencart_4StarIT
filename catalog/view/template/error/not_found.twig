@@ -1,74 +1,39 @@
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  .row {
+    width: 1220px;
   }
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, sans-serif;
-    background-color: #f8f9fa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 20px;
-  }
-
-  #content {
+  .col-here {
     width: 1220px;
     max-width: 1220px;
     height: 640px;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
     margin: auto;
-  }
-
-  #content::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(
-      circle at 30% 40%,
-      rgba(255, 255, 255, 0.1) 0%,
-      transparent 50%
-    );
-    pointer-events: none;
+    gap: 10px;
   }
 
   .error-section {
     width: 382px;
     height: 442px;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
     z-index: 2;
   }
 
   .error-section img {
-    position: relative;
     width: 358.59423712636544px;
     height: 422.3355071128011px;
     transform: rotate(-3.21deg);
-    opacity: 1;
-    top: -0px;
-    color: rgba(255, 187, 0, 1);
   }
 
-  .four-zero-four-number {
+  .error-section p {
     width: 179px;
     height: 88px;
     color: rgba(255, 187, 0, 1);
@@ -81,6 +46,7 @@
     text-align: center;
     position: relative;
     bottom: 190px;
+    left: 90px;
   }
 
   .text-section {
@@ -95,77 +61,37 @@
   }
 
   .error-message {
-    font-size: 18px;
-    color: #5a6c7d;
+    font-size: 17.17px;
+    color: #000000;
     text-align: center;
-    font-weight: 500;
-    line-height: 1.4;
+    font-weight: 600;
+    line-height: 100%;
     margin-bottom: 0;
   }
 
-  .btn-container {
-    display: flex;
-    justify-content: center;
-  }
-
-  .btn-container {
+  .text-section a {
     width: 179px;
     height: 41px;
     background-color: white;
     color: rgba(1, 156, 66, 1);
     border: 3.1px solid rgba(1, 156, 66, 1);
     border-radius: 62.03px;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 18.61px;
+    font-weight: 700;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+    transition: all 0.9s ease;
     position: relative;
     overflow: hidden;
   }
 
-  .btn-container a {
-    color: rgba(1, 156, 66, 1);
+  .text-section a:hover {
+    background-color:rgba(1, 156, 66, 1);
+    color: white;
   }
 
-
-  /* Responsive design */
-  @media (max-width: 1280px) {
-    #content {
-      width: 90%;
-      max-width: 1220px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    #content {
-      height: auto;
-      min-height: 640px;
-      padding: 40px 20px;
-    }
-
-    .error-section {
-      width: 100%;
-      height: auto;
-    }
-
-    .text-section {
-      width: 100%;
-      height: auto;
-      margin-top: 20px;
-    }
-
-    .four-zero-four-number {
-      font-size: 80px;
-    }
-
-    .error-title h1 {
-      font-size: 32px;
-    }
-  }
 </style>
 
 {{ header }}
@@ -179,15 +105,16 @@
   </ul>
   <div class="row">
     {{ column_left }}
-    <div id="content" class="col">
+    <div id="content" class="col-here">
       {{ content_top }}
       <!-- <h1>{{ heading_title }}</h1>
       <p>{{ text_error }}</p>
       <div class="text-end"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div> -->
 
       <div class="error-section">
-        <img src="image\error.png" alt="error">
+        
         <div class="four-zero-four-number">
+          <img src="image\error.png" alt="error">
           <p>404 Error</p>
         </div>
         
@@ -197,9 +124,7 @@
         <p class="error-message">
           Sorry, we couldn't find the page you are looking for.
         </p>
-        <div class="btn-container">
-          <a href="{{ continue }}">Back to Home</a>
-        </div>
+        <a href="{{ continue }}">Back to Home</a>
       </div>
 
       {{ content_bottom }}
@@ -208,3 +133,4 @@
     {{ column_right }}
   </div>
 </div>
+{{ footer }}
