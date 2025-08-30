@@ -54,7 +54,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
     position: relative;
     z-index: 2;
   }
@@ -62,13 +61,11 @@
   .error-section img {
     position: relative;
     width: 358.59423712636544px;
-height: 422.3355071128011px;
-  rotate: 3.21 deg;
-opacity: 1;
-top: -0px;
-
-    height: auto;
-    margin-bottom: 20px;
+    height: 422.3355071128011px;
+    transform: rotate(-3.21deg);
+    opacity: 1;
+    top: -0px;
+    color: rgba(255, 187, 0, 1);
   }
 
   .four-zero-four-number {
@@ -83,7 +80,7 @@ top: -0px;
     letter-spacing: 0px;
     text-align: center;
     position: relative;
-    bottom: 110px;
+    bottom: 190px;
   }
 
   .text-section {
@@ -101,9 +98,9 @@ top: -0px;
     font-size: 18px;
     color: #5a6c7d;
     text-align: center;
-    margin-bottom: 25px;
     font-weight: 500;
     line-height: 1.4;
+    margin-bottom: 0;
   }
 
   .btn-container {
@@ -111,13 +108,13 @@ top: -0px;
     justify-content: center;
   }
 
-  .btn-primary {
+  .btn-container {
     width: 179px;
     height: 41px;
-    background: linear-gradient(135deg, #10b981, #059669);
-    color: white;
-    border: none;
-    border-radius: 25px;
+    background-color: white;
+    color: rgba(1, 156, 66, 1);
+    border: 3.1px solid rgba(1, 156, 66, 1);
+    border-radius: 62.03px;
     font-size: 16px;
     font-weight: 600;
     text-decoration: none;
@@ -130,99 +127,10 @@ top: -0px;
     overflow: hidden;
   }
 
-  .btn-primary::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
-    transition: left 0.5s;
+  .btn-container a {
+    color: rgba(1, 156, 66, 1);
   }
 
-  .btn-primary:hover::before {
-    left: 100%;
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(16, 185, 129, 0.4);
-    background: linear-gradient(135deg, #059669, #047857);
-  }
-
-  .btn-primary:active {
-    transform: translateY(0);
-  }
-
-  /* Decorative elements */
-  .floating-shapes {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .shape {
-    position: absolute;
-    opacity: 0.1;
-  }
-
-  .shape-1 {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(45deg, #ffd700, #ffa500);
-    border-radius: 50%;
-    top: 15%;
-    left: 10%;
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .shape-2 {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(45deg, #10b981, #059669);
-    border-radius: 50%;
-    top: 20%;
-    right: 15%;
-    animation: float 8s ease-in-out infinite reverse;
-  }
-
-  .shape-3 {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(45deg, #3b82f6, #1d4ed8);
-    border-radius: 50%;
-    bottom: 20%;
-    left: 8%;
-    animation: float 7s ease-in-out infinite;
-  }
-
-  .shape-4 {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(45deg, #f59e0b, #d97706);
-    border-radius: 50%;
-    bottom: 25%;
-    right: 12%;
-    animation: float 9s ease-in-out infinite reverse;
-  }
-
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-      transform: translateY(-20px) rotate(180deg);
-    }
-  }
 
   /* Responsive design */
   @media (max-width: 1280px) {
@@ -290,7 +198,7 @@ top: -0px;
           Sorry, we couldn't find the page you are looking for.
         </p>
         <div class="btn-container">
-          <a href="{{ continue }}" class="btn btn-primary">Back to Home</a>
+          <a href="{{ continue }}">Back to Home</a>
         </div>
       </div>
 
