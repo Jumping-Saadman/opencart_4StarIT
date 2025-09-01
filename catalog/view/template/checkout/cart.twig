@@ -6,6 +6,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
+        border-radius: 15px;
+        margin: auto;
     }
     .top-section {
         width: 894px;
@@ -62,6 +64,10 @@
         color: rgba(1, 156, 66, 1);
         transition: all 0.9s ease;
     }
+    .maintanence-container button:hover a {
+        color: white;
+        transition: all 0.9s ease;
+    }
 </style>
 
 {{ header }}
@@ -79,7 +85,7 @@
         <div class="top-section">
           <img src="image\Under-Maintenance 1.png" alt="Error" />
           <div class="span">
-            <h1 class="error-message">Website is Under Maintanence.</h1>
+            <h1 class="error-message">Website is in Under Maintanence.</h1>
           </div>
           
         </div>
@@ -185,3 +191,4 @@ $('#cart').on('submit', 'form', function(e) {
     }, 3000);
 });
 //--></script>
+{{ footer }}
