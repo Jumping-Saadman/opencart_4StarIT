@@ -9,7 +9,16 @@
     {{ column_left }}
     <div id="content" class="col">
       {{ content_top }}
-      <div id="shopping-cart">{{ list }}</div>
+      <div class="maintanence-container">
+        <div class="top-section">
+          <img src="image\Under-Maintenance 1.png" alt="Error" />
+          <h1 class="error-message">Website is Under Maintanence.</h1>
+        </div>
+        <div class="bottom-section">
+          <a href="{{ home }}">Back to Home</a>
+        </div>
+
+      </div>
       {{ content_bottom }}
     </div>
     {{ column_right }}
@@ -110,4 +119,3 @@ $('#cart').on('submit', 'form', function(e) {
     }, 3000);
 });
 //--></script>
-{{ footer }}
