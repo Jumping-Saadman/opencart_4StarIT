@@ -418,176 +418,187 @@
         });
       </script>
 
-      <!-- Dropdown section -->
-      <div>
-        <div class="dropdown-container">
-          <div class="dropdown-header" onclick="toggleDropdown()">
-            <div class="dropdown-title-container">
-              <span class="dropdown-title">Manufacturer</span>
-              <span class="selected-count let-it-hide" id="selectedCount">(0 selected)</span>
-            </div>
-            <div class="dropdown-arrow" id="dropdownArrow"></div>
+      <!-- Manufacturer Dropdown -->
+      <div class="dropdown-container">
+        <div class="dropdown-header" onclick="toggleDropdown(1)">
+          <div class="dropdown-title-container">
+            <span class="dropdown-title">Manufacturer</span>
+            <span class="selected-count let-it-hide" id="selectedCount1">(0 selected)</span>
           </div>
-
-          <div class="dropdown-content" id="dropdownContent">
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus1" onchange="updateSelectedCount()">
-              <label for="asus1" class="checkbox-label">Asus</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="lenovo" onchange="updateSelectedCount()">
-              <label for="lenovo" class="checkbox-label">Lenovo</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="acer" onchange="updateSelectedCount()">
-              <label for="acer" class="checkbox-label">Acer</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="msi" onchange="updateSelectedCount()">
-              <label for="msi" class="checkbox-label">MSI</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="dahua" onchange="updateSelectedCount()">
-              <label for="dahua" class="checkbox-label">Dahua</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="benq" onchange="updateSelectedCount()">
-              <label for="benq" class="checkbox-label">BenQ</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="gigabyte" onchange="updateSelectedCount()">
-              <label for="gigabyte" class="checkbox-label">Gigabyte</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus2" onchange="updateSelectedCount()">
-              <label for="asus2" class="checkbox-label">Asus</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus3" onchange="updateSelectedCount()">
-              <label for="asus3" class="checkbox-label">Asus</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus4" onchange="updateSelectedCount()">
-              <label for="asus4" class="checkbox-label">Asus</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus5" onchange="updateSelectedCount()">
-              <label for="asus5" class="checkbox-label">Asus</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus6" onchange="updateSelectedCount()">
-              <label for="asus6" class="checkbox-label">Asus</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus7" onchange="updateSelectedCount()">
-              <label for="asus7" class="checkbox-label">Asus</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus8" onchange="updateSelectedCount()">
-              <label for="asus8" class="checkbox-label">Asus</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus9" onchange="updateSelectedCount()">
-              <label for="asus9" class="checkbox-label">Asus</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus10" onchange="updateSelectedCount()">
-              <label for="asus10" class="checkbox-label">Asus</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus11" onchange="updateSelectedCount()">
-              <label for="asus11" class="checkbox-label">Asus</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus12" onchange="updateSelectedCount()">
-              <label for="asus12" class="checkbox-label">Asus</label>
-            </div>
+          <div class="dropdown-arrow" id="dropdownArrow1"></div>
+        </div>
+        <div class="dropdown-content" id="dropdownContent1">
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus1" onchange="updateSelectedCount()">
+            <label for="asus1" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="lenovo" onchange="updateSelectedCount()">
+            <label for="lenovo" class="checkbox-label">Lenovo</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="acer" onchange="updateSelectedCount()">
+            <label for="acer" class="checkbox-label">Acer</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="msi" onchange="updateSelectedCount()">
+            <label for="msi" class="checkbox-label">MSI</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="dahua" onchange="updateSelectedCount()">
+            <label for="dahua" class="checkbox-label">Dahua</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="benq" onchange="updateSelectedCount()">
+            <label for="benq" class="checkbox-label">BenQ</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="gigabyte" onchange="updateSelectedCount()">
+            <label for="gigabyte" class="checkbox-label">Gigabyte</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus2" onchange="updateSelectedCount()">
+            <label for="asus2" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus3" onchange="updateSelectedCount()">
+            <label for="asus3" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus4" onchange="updateSelectedCount()">
+            <label for="asus4" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus5" onchange="updateSelectedCount()">
+            <label for="asus5" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus6" onchange="updateSelectedCount()">
+            <label for="asus6" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus7" onchange="updateSelectedCount()">
+            <label for="asus7" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus8" onchange="updateSelectedCount()">
+            <label for="asus8" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus9" onchange="updateSelectedCount()">
+            <label for="asus9" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus10" onchange="updateSelectedCount()">
+            <label for="asus10" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus11" onchange="updateSelectedCount()">
+            <label for="asus11" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus12" onchange="updateSelectedCount()">
+            <label for="asus12" class="checkbox-label">Asus</label>
           </div>
         </div>
       </div>
+
+      <!-- Screen size drop down -->
+
       <div>
         <div class="dropdown-container">
-          <div class="dropdown-header" onclick="toggleDropdown()">
+          <div class="dropdown-header" onclick="toggleDropdown(2)">
             <div class="dropdown-title-container">
-              <span class="dropdown-title">Manufacturer</span>
-              <span class="selected-count let-it-hide" id="selectedCount">(0 selected)</span>
+              <span class="dropdown-title">Screen Size</span>
+              <span class="selected-count let-it-hide" id="selectedCount2">(0 selected)</span>
             </div>
-            <div class="dropdown-arrow" id="dropdownArrow"></div>
+            <div class="dropdown-arrow" id="dropdownArrow2"></div>
           </div>
 
-          <div class="dropdown-content" id="dropdownContent">
+          <div class="dropdown-content" id="dropdownContent2">
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus1" onchange="updateSelectedCount()">
-              <label for="asus1" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="15to17" onchange="updateSelectedCount()">
+              <label for="asus1" class="checkbox-label">15 - 17 inches</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="lenovo" onchange="updateSelectedCount()">
-              <label for="lenovo" class="checkbox-label">Lenovo</label>
+              <input type="checkbox" class="checkbox-input" id="18to20" onchange="updateSelectedCount()">
+              <label for="lenovo" class="checkbox-label">18 - 20 inches</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="acer" onchange="updateSelectedCount()">
-              <label for="acer" class="checkbox-label">Acer</label>
+              <input type="checkbox" class="checkbox-input" id="21to24" onchange="updateSelectedCount()">
+              <label for="acer" class="checkbox-label">21 - 24 inches</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="msi" onchange="updateSelectedCount()">
-              <label for="msi" class="checkbox-label">MSI</label>
+              <input type="checkbox" class="checkbox-input" id="25to30" onchange="updateSelectedCount()">
+              <label for="msi" class="checkbox-label">25 - 30 inches</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="dahua" onchange="updateSelectedCount()">
-              <label for="dahua" class="checkbox-label">Dahua</label>
+              <input type="checkbox" class="checkbox-input" id="31to40" onchange="updateSelectedCount()">
+              <label for="dahua" class="checkbox-label">31 - 40 inches</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="benq" onchange="updateSelectedCount()">
-              <label for="benq" class="checkbox-label">BenQ</label>
+              <input type="checkbox" class="checkbox-input" id="40plus" onchange="updateSelectedCount()">
+              <label for="benq" class="checkbox-label">Above 40 inches</label>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Refresh rate drop down -->
+
+      <div>
+        <div class="dropdown-container">
+          <div class="dropdown-header" onclick="toggleDropdown(3)">
+            <div class="dropdown-title-container">
+              <span class="dropdown-title">Refresh Rate</span>
+              <span class="selected-count let-it-hide" id="selectedCount3">(0 selected)</span>
+            </div>
+            <div class="dropdown-arrow" id="dropdownArrow3"></div>
+          </div>
+
+          <div class="dropdown-content" id="dropdownContent3">
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="60" onchange="updateSelectedCount()">
+              <label for="asus1" class="checkbox-label">60 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="gigabyte" onchange="updateSelectedCount()">
-              <label for="gigabyte" class="checkbox-label">Gigabyte</label>
+              <input type="checkbox" class="checkbox-input" id="100" onchange="updateSelectedCount()">
+              <label for="lenovo" class="checkbox-label">100 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus2" onchange="updateSelectedCount()">
-              <label for="asus2" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="120" onchange="updateSelectedCount()">
+              <label for="acer" class="checkbox-label">120 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus3" onchange="updateSelectedCount()">
-              <label for="asus3" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="144" onchange="updateSelectedCount()">
+              <label for="msi" class="checkbox-label">144 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus4" onchange="updateSelectedCount()">
-              <label for="asus4" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="165" onchange="updateSelectedCount()">
+              <label for="dahua" class="checkbox-label">165 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus5" onchange="updateSelectedCount()">
-              <label for="asus5" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="170" onchange="updateSelectedCount()">
+              <label for="benq" class="checkbox-label">170 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus6" onchange="updateSelectedCount()">
-              <label for="asus6" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="180" onchange="updateSelectedCount()">
+              <label for="benq" class="checkbox-label">180 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus7" onchange="updateSelectedCount()">
-              <label for="asus7" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="200" onchange="updateSelectedCount()">
+              <label for="benq" class="checkbox-label">200 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus8" onchange="updateSelectedCount()">
-              <label for="asus8" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="240" onchange="updateSelectedCount()">
+              <label for="benq" class="checkbox-label">240 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus9" onchange="updateSelectedCount()">
-              <label for="asus9" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="240plus" onchange="updateSelectedCount()">
+              <label for="benq" class="checkbox-label">Above 240</label>
             </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus10" onchange="updateSelectedCount()">
-              <label for="asus10" class="checkbox-label">Asus</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus11" onchange="updateSelectedCount()">
-              <label for="asus11" class="checkbox-label">Asus</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="asus12" onchange="updateSelectedCount()">
-              <label for="asus12" class="checkbox-label">Asus</label>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -595,47 +606,28 @@
       <script>
         let isCollapsed = false;
 
-        function toggleDropdown() {
-          const content = document.getElementById('dropdownContent');
-          const arrow = document.getElementById('dropdownArrow');
+        function toggleDropdown(idx) {
+  const content = document.getElementById('dropdownContent' + idx);
+  const arrow = document.getElementById('dropdownArrow' + idx);
 
-          isCollapsed = !isCollapsed;
+  content.classList.toggle('collapsed');
+  arrow.classList.toggle('collapsed');
+}
 
-          if (isCollapsed) {
-            content.classList.add('collapsed');
-            arrow.classList.add('collapsed');
-          } else {
-            content.classList.remove('collapsed');
-            arrow.classList.remove('collapsed');
-          }
-        }
+function updateSelectedCount(idx) {
+  const container = document.getElementById('dropdownContent' + idx);
+  const checkboxes = container.querySelectorAll('.checkbox-input');
+  const selectedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+  const countElement = document.getElementById('selectedCount' + idx);
 
-        function updateSelectedCount() {
-          const checkboxes = document.querySelectorAll('.checkbox-input');
-          const selectedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
-          const countElement = document.getElementById('selectedCount');
-
-          if (selectedCount === 0) {
-            countElement.textContent = '(0 selected)';
-          } else if (selectedCount === 1) {
-            countElement.textContent = '(1 selected)';
-          } else {
-            countElement.textContent = `(${selectedCount} selected)`;
-          }
-        }
-
-        // Get selected values function (useful for form submission)
-        function getSelectedManufacturers() {
-          const checkboxes = document.querySelectorAll('.checkbox-input:checked');
-          return Array.from(checkboxes).map(cb => cb.nextElementSibling.textContent);
-        }
-
-        // Example: Log selected values to console when selection changes
-        document.addEventListener('change', function (e) {
-          if (e.target.classList.contains('checkbox-input')) {
-            console.log('Selected manufacturers:', getSelectedManufacturers());
-          }
-        });
+  if (selectedCount === 0) {
+    countElement.textContent = '(0 selected)';
+  } else if (selectedCount === 1) {
+    countElement.textContent = '(1 selected)';
+  } else {
+    countElement.textContent = `(${selectedCount} selected)`;
+  }
+}
       </script>
 
       <!-- <div id="carousel-banner-0" class="carousel slide carousel-fade" data-bs-ride="carousel">
