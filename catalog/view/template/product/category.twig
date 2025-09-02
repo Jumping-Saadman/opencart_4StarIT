@@ -1,3 +1,119 @@
+<style>
+    .let-it-hide {
+        display: none;
+    }
+    .dropdown-container {
+            max-width: 300px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .dropdown-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-header:hover {
+            background-color: #f8f9fa;
+        }
+
+        .dropdown-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .dropdown-arrow {
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #666;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-arrow.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .dropdown-content {
+            max-height: 400px;
+            overflow-y: auto;
+            transition: max-height 0.3s ease;
+        }
+
+        .dropdown-content.collapsed {
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s ease;
+        }
+
+        .checkbox-item:last-child {
+            border-bottom: none;
+        }
+
+        .checkbox-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .checkbox-input {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #007bff;
+        }
+
+        .checkbox-label {
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* Custom scrollbar */
+        .dropdown-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .dropdown-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .dropdown-content::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .dropdown-content::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* Selected count indicator */
+        .selected-count {
+            font-size: 12px;
+            color: #666;
+            margin-left: 8px;
+        }
+</style>
+
 {{ header }}
 <div id="product-category" class="container">
   <ul class="breadcrumb">
@@ -5,7 +121,177 @@
       <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
     {% endfor %}
   </ul>
-  <div class="row">{{ column_left }}
+  <div class="row">
+    <div class="let-it-hide">{{ column_left }}</div>
+    
+    <aside id="column-left" class="col-3 d-none d-md-block">
+      <div class="list-group mb-3">
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=20" class="list-group-item">Desktops (13)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=18" class="list-group-item">Laptops &amp; Notebooks (5)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=25" class="list-group-item">Components (2)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=57" class="list-group-item active">Tablets (1)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=17" class="list-group-item">Software (0)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=24" class="list-group-item">Phones &amp; PDAs (3)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=33" class="list-group-item">Cameras (2)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=34" class="list-group-item">MP3 Players (4)</a>
+      </div>
+
+      <div>
+        <div class="dropdown-container">
+        <div class="dropdown-header" onclick="toggleDropdown()">
+            <div>
+                <span class="dropdown-title">Manufacturer</span>
+                <span class="selected-count let-it-hide" id="selectedCount">(0 selected)</span>
+            </div>
+            <div class="dropdown-arrow" id="dropdownArrow"></div>
+        </div>
+        
+        <div class="dropdown-content" id="dropdownContent">
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="asus1" onchange="updateSelectedCount()">
+                <label for="asus1" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="lenovo" onchange="updateSelectedCount()">
+                <label for="lenovo" class="checkbox-label">Lenovo</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="acer" onchange="updateSelectedCount()">
+                <label for="acer" class="checkbox-label">Acer</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="msi" onchange="updateSelectedCount()">
+                <label for="msi" class="checkbox-label">MSI</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="dahua" onchange="updateSelectedCount()">
+                <label for="dahua" class="checkbox-label">Dahua</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="benq" onchange="updateSelectedCount()">
+                <label for="benq" class="checkbox-label">BenQ</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="gigabyte" onchange="updateSelectedCount()">
+                <label for="gigabyte" class="checkbox-label">Gigabyte</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="asus2" onchange="updateSelectedCount()">
+                <label for="asus2" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="asus3" onchange="updateSelectedCount()">
+                <label for="asus3" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="asus4" onchange="updateSelectedCount()">
+                <label for="asus4" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="asus5" onchange="updateSelectedCount()">
+                <label for="asus5" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="asus6" onchange="updateSelectedCount()">
+                <label for="asus6" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="asus7" onchange="updateSelectedCount()">
+                <label for="asus7" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="asus8" onchange="updateSelectedCount()">
+                <label for="asus8" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="asus9" onchange="updateSelectedCount()">
+                <label for="asus9" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="asus10" onchange="updateSelectedCount()">
+                <label for="asus10" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="asus11" onchange="updateSelectedCount()">
+                <label for="asus11" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" class="checkbox-input" id="asus12" onchange="updateSelectedCount()">
+                <label for="asus12" class="checkbox-label">Asus</label>
+            </div>
+        </div>
+    </div>
+      </div>
+
+      <script>
+        let isCollapsed = false;
+
+        function toggleDropdown() {
+            const content = document.getElementById('dropdownContent');
+            const arrow = document.getElementById('dropdownArrow');
+            
+            isCollapsed = !isCollapsed;
+            
+            if (isCollapsed) {
+                content.classList.add('collapsed');
+                arrow.classList.add('collapsed');
+            } else {
+                content.classList.remove('collapsed');
+                arrow.classList.remove('collapsed');
+            }
+        }
+
+        function updateSelectedCount() {
+            const checkboxes = document.querySelectorAll('.checkbox-input');
+            const selectedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+            const countElement = document.getElementById('selectedCount');
+            
+            if (selectedCount === 0) {
+                countElement.textContent = '(0 selected)';
+            } else if (selectedCount === 1) {
+                countElement.textContent = '(1 selected)';
+            } else {
+                countElement.textContent = `(${selectedCount} selected)`;
+            }
+        }
+
+        // Get selected values function (useful for form submission)
+        function getSelectedManufacturers() {
+            const checkboxes = document.querySelectorAll('.checkbox-input:checked');
+            return Array.from(checkboxes).map(cb => cb.nextElementSibling.textContent);
+        }
+
+        // Example: Log selected values to console when selection changes
+        document.addEventListener('change', function(e) {
+            if (e.target.classList.contains('checkbox-input')) {
+                console.log('Selected manufacturers:', getSelectedManufacturers());
+            }
+        });
+    </script>
+
+      <!-- <div id="carousel-banner-0" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="row justify-content-center">
+              <div class="col-12 text-center">
+                <a href="index.php?route=product/manufacturer.info&amp;manufacturer_id=7"><img src="http://localhost/upload/image/cache/catalog/demo/compaq_presario-200x180.jpg" alt="HP Banner" class="img-fluid"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- <script type="text/javascript"><!--
+        $(document).ready(function() {
+          new bootstrap.Carousel(document.querySelector('#carousel-banner-0'), {
+            ride: 'carousel',
+            interval: 5000,
+            wrap: true
+          });
+        });
+  //--></script> -->
+
+    </aside>
+
     <div id="content" class="col">{{ content_top }}
       <h1>{{ heading_title }}</h1>
       {% if image or description %}
