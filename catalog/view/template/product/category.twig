@@ -1,273 +1,642 @@
 <style>
-    .let-it-hide {
-        display: none;
-    }
-    .dropdown-container {
-            max-width: 300px;
-            margin: 20px auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
+  .let-it-hide {
+    display: none;
+  }
 
-        .dropdown-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 20px;
-            background: white;
-            border-bottom: 1px solid #e0e0e0;
-            cursor: pointer;
-            user-select: none;
-            transition: background-color 0.2s ease;
-        }
+  /* Price Range Slider Styles */
+  .price-range-container {
+    width: 173px;
+    height: 91.55px;
+    margin: 0 auto;
+    background: white;
+    padding: 8px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-        .dropdown-header:hover {
-            background-color: #f8f9fa;
-        }
+  .price-range-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+    line-height: 1;
+  }
 
-        .dropdown-title {
-            font-size: 16px;
-            font-weight: 500;
-            color: #333;
-        }
+  .slider-container {
+    position: relative;
+    margin: 4px 0;
+    height: 20px;
+    flex-shrink: 0;
+  }
 
-        .dropdown-arrow {
-            width: 0;
-            height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-top: 8px solid #666;
-            transition: transform 0.3s ease;
-        }
+  .slider-track {
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    right: 4px;
+    height: 2px;
+    background-color: #e0e0e0;
+    border-radius: 1px;
+    transform: translateY(-50%);
+  }
 
-        .dropdown-arrow.collapsed {
-            transform: rotate(-90deg);
-        }
+  .slider-range {
+    position: absolute;
+    height: 2px;
+    background-color: #ff9500;
+    border-radius: 1px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
-        .dropdown-content {
-            max-height: 400px;
-            overflow-y: auto;
-            transition: max-height 0.3s ease;
-        }
+  .slider-handle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #333;
+    border-radius: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    transition: box-shadow 0.2s ease, transform 0.1s ease;
+    z-index: 2;
+  }
 
-        .dropdown-content.collapsed {
-            max-height: 0;
-            overflow: hidden;
-        }
+  .slider-handle:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transform: translate(-50%, -50%) scale(1.1);
+  }
 
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 20px;
-            border-bottom: 1px solid #f0f0f0;
-            transition: background-color 0.2s ease;
-        }
+  .slider-handle:active {
+    cursor: grabbing;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  }
 
-        .checkbox-item:last-child {
-            border-bottom: none;
-        }
+  .input-container {
+    display: flex;
+    gap: 6px;
+    margin-top: 0;
+  }
 
-        .checkbox-item:hover {
-            background-color: #f8f9fa;
-        }
+  .input-wrapper {
+    flex: 1;
+  }
 
-        .checkbox-input {
-            width: 18px;
-            height: 18px;
-            margin-right: 12px;
-            cursor: pointer;
-            accent-color: #007bff;
-        }
+  .input-field {
+    width: 100%;
+    padding: 4px 6px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    font-size: 10px;
+    color: #333;
+    background-color: #fafafa;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    text-align: center;
+    height: 24px;
+  }
 
-        .checkbox-label {
-            font-size: 14px;
-            color: #333;
-            cursor: pointer;
-            flex: 1;
-        }
+  .input-field:focus {
+    outline: none;
+    border-color: #ff9500;
+    background-color: white;
+  }
 
-        /* Custom scrollbar */
-        .dropdown-content::-webkit-scrollbar {
-            width: 6px;
-        }
+  .input-field:hover {
+    border-color: #bbb;
+  }
 
-        .dropdown-content::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
+  /* Hidden range inputs for accessibility */
+  .hidden-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
 
-        .dropdown-content::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 3px;
-        }
+  .demo-info {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #666;
+  }
 
-        .dropdown-content::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
-        }
+  /* Dropdown Checklist Styles */
+  .dropdown-container {
+    width: 173px;
+    max-width: 300px;
+    margin: 20px auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
 
-        /* Selected count indicator */
-        .selected-count {
-            font-size: 12px;
-            color: #666;
-            margin-left: 8px;
-        }
+  .row .dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .dropdown-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .dropdown-arrow {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #666;
+    transition: transform 0.3s ease;
+  }
+
+  .dropdown-arrow.collapsed {
+    transform: rotate(-90deg);
+  }
+
+  .dropdown-content {
+    overflow-y: auto;
+    transition: max-height 0.3s ease;
+  }
+
+  .dropdown-content.collapsed {
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+  }
+
+  .checkbox-item:last-child {
+    border-bottom: none;
+  }
+
+  .checkbox-input {
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+    cursor: pointer;
+    accent-color: #007bff;
+  }
+
+  .checkbox-label {
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    flex: 1;
+  }
+
+
+  /* Selected count indicator */
+  .selected-count {
+    font-size: 12px;
+    color: #666;
+    margin-left: 8px;
+  }
 </style>
 
 {{ header }}
 <div id="product-category" class="container">
   <ul class="breadcrumb">
     {% for breadcrumb in breadcrumbs %}
-      <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
     {% endfor %}
   </ul>
   <div class="row">
     <div class="let-it-hide">{{ column_left }}</div>
-    
+
     <aside id="column-left" class="col-3 d-none d-md-block">
       <div class="list-group mb-3">
-        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=20" class="list-group-item">Desktops (13)</a>
-        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=18" class="list-group-item">Laptops &amp; Notebooks (5)</a>
-        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=25" class="list-group-item">Components (2)</a>
-        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=57" class="list-group-item active">Tablets (1)</a>
-        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=17" class="list-group-item">Software (0)</a>
-        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=24" class="list-group-item">Phones &amp; PDAs (3)</a>
-        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=33" class="list-group-item">Cameras (2)</a>
-        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=34" class="list-group-item">MP3 Players (4)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=20"
+          class="list-group-item">Desktops (13)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=18"
+          class="list-group-item">Laptops &amp; Notebooks (5)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=25"
+          class="list-group-item">Components (2)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=57"
+          class="list-group-item active">Tablets (1)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=17"
+          class="list-group-item">Software (0)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=24"
+          class="list-group-item">Phones &amp; PDAs (3)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=33"
+          class="list-group-item">Cameras (2)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=34"
+          class="list-group-item">MP3 Players (4)</a>
       </div>
 
+      <!-- Price range slider -->
+
+      <div class="price-range-container">
+        <h2 class="price-range-title">Price Range</h2>
+
+        <div class="slider-container">
+          <div class="slider-track"></div>
+          <div class="slider-range" id="sliderRange"></div>
+          <div class="slider-handle" id="minHandle"></div>
+          <div class="slider-handle" id="maxHandle"></div>
+        </div>
+
+        <div class="input-container">
+          <div class="input-wrapper">
+            <input type="text" class="input-field" id="minInput" placeholder="0">
+          </div>
+          <div class="input-wrapper">
+            <input type="text" class="input-field" id="maxInput" placeholder="500,000">
+          </div>
+        </div>
+      </div>
+
+      <script>
+        class PriceRangeSlider {
+          constructor() {
+            this.minValue = 0;
+            this.maxValue = 500000;
+            this.currentMin = 0;
+            this.currentMax = 437000;
+
+            this.slider = document.querySelector('.slider-container');
+            this.minHandle = document.getElementById('minHandle');
+            this.maxHandle = document.getElementById('maxHandle');
+            this.sliderRange = document.getElementById('sliderRange');
+            this.minInput = document.getElementById('minInput');
+            this.maxInput = document.getElementById('maxInput');
+
+            this.isDragging = false;
+            this.activeHandle = null;
+
+            this.init();
+          }
+
+          init() {
+            this.updateDisplay();
+            this.bindEvents();
+          }
+
+          bindEvents() {
+            // Handle dragging
+            this.minHandle.addEventListener('mousedown', (e) => this.startDrag(e, 'min'));
+            this.maxHandle.addEventListener('mousedown', (e) => this.startDrag(e, 'max'));
+
+            document.addEventListener('mousemove', (e) => this.drag(e));
+            document.addEventListener('mouseup', () => this.stopDrag());
+
+            // Handle input changes
+            this.minInput.addEventListener('input', (e) => this.updateFromInput('min', e.target.value));
+            this.maxInput.addEventListener('input', (e) => this.updateFromInput('max', e.target.value));
+
+            // Handle input blur (format numbers)
+            this.minInput.addEventListener('blur', () => this.formatInput('min'));
+            this.maxInput.addEventListener('blur', () => this.formatInput('max'));
+
+            // Prevent text selection during drag
+            document.addEventListener('selectstart', (e) => {
+              if (this.isDragging) e.preventDefault();
+            });
+          }
+
+          startDrag(e, handle) {
+            this.isDragging = true;
+            this.activeHandle = handle;
+            document.body.style.cursor = 'grabbing';
+            e.preventDefault();
+          }
+
+          drag(e) {
+            if (!this.isDragging || !this.activeHandle) return;
+
+            const rect = this.slider.getBoundingClientRect();
+            const sliderWidth = rect.width - 8; // Account for handle padding
+            const percentage = Math.max(0, Math.min(1, (e.clientX - rect.left - 4) / sliderWidth));
+            const value = Math.round(this.minValue + percentage * (this.maxValue - this.minValue));
+
+            if (this.activeHandle === 'min') {
+              this.currentMin = Math.min(value, this.currentMax - 1000); // Minimum gap of 1000
+            } else {
+              this.currentMax = Math.max(value, this.currentMin + 1000); // Minimum gap of 1000
+            }
+
+            this.updateDisplay();
+          }
+
+          stopDrag() {
+            this.isDragging = false;
+            this.activeHandle = null;
+            document.body.style.cursor = '';
+          }
+
+          updateFromInput(type, value) {
+            // Remove any non-digit characters except commas
+            const cleanValue = value.replace(/[^\d,]/g, '');
+            const numValue = parseInt(cleanValue.replace(/,/g, '')) || 0;
+
+            if (type === 'min') {
+              this.currentMin = Math.max(this.minValue, Math.min(numValue, this.currentMax - 1000));
+            } else {
+              this.currentMax = Math.min(this.maxValue, Math.max(numValue, this.currentMin + 1000));
+            }
+
+            this.updateDisplay();
+          }
+
+          formatInput(type) {
+            if (type === 'min') {
+              this.minInput.value = this.formatNumber(this.currentMin);
+            } else {
+              this.maxInput.value = this.formatNumber(this.currentMax);
+            }
+          }
+
+          updateDisplay() {
+            // Update handle positions
+            const minPercent = (this.currentMin - this.minValue) / (this.maxValue - this.minValue);
+            const maxPercent = (this.currentMax - this.minValue) / (this.maxValue - this.minValue);
+
+            this.minHandle.style.left = `${minPercent * 100}%`;
+            this.maxHandle.style.left = `${maxPercent * 100}%`;
+
+            // Update range bar
+            this.sliderRange.style.left = `${minPercent * 100}%`;
+            this.sliderRange.style.width = `${(maxPercent - minPercent) * 100}%`;
+
+            // Update input values
+            this.minInput.value = this.formatNumber(this.currentMin);
+            this.maxInput.value = this.formatNumber(this.currentMax);
+          }
+
+          formatNumber(num) {
+            return num.toLocaleString();
+          }
+
+          // Public method to get current values
+          getValues() {
+            return {
+              min: this.currentMin,
+              max: this.currentMax
+            };
+          }
+
+          // Public method to set values
+          setValues(min, max) {
+            this.currentMin = Math.max(this.minValue, Math.min(min, this.maxValue));
+            this.currentMax = Math.max(this.minValue, Math.min(max, this.maxValue));
+
+            // Ensure minimum gap
+            if (this.currentMax - this.currentMin < 1000) {
+              if (min !== this.currentMin) {
+                this.currentMax = this.currentMin + 1000;
+              } else {
+                this.currentMin = this.currentMax - 1000;
+              }
+            }
+
+            this.updateDisplay();
+          }
+        }
+
+        // Initialize the slider
+        const priceSlider = new PriceRangeSlider();
+
+        // Example of how to use the slider programmatically
+        window.addEventListener('load', () => {
+          console.log('Initial values:', priceSlider.getValues());
+        });
+      </script>
+
+      <!-- Dropdown section -->
       <div>
         <div class="dropdown-container">
-        <div class="dropdown-header" onclick="toggleDropdown()">
-            <div>
-                <span class="dropdown-title">Manufacturer</span>
-                <span class="selected-count let-it-hide" id="selectedCount">(0 selected)</span>
+          <div class="dropdown-header" onclick="toggleDropdown()">
+            <div class="dropdown-title-container">
+              <span class="dropdown-title">Manufacturer</span>
+              <span class="selected-count let-it-hide" id="selectedCount">(0 selected)</span>
             </div>
             <div class="dropdown-arrow" id="dropdownArrow"></div>
+          </div>
+
+          <div class="dropdown-content" id="dropdownContent">
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="asus1" onchange="updateSelectedCount()">
+              <label for="asus1" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="lenovo" onchange="updateSelectedCount()">
+              <label for="lenovo" class="checkbox-label">Lenovo</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="acer" onchange="updateSelectedCount()">
+              <label for="acer" class="checkbox-label">Acer</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="msi" onchange="updateSelectedCount()">
+              <label for="msi" class="checkbox-label">MSI</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="dahua" onchange="updateSelectedCount()">
+              <label for="dahua" class="checkbox-label">Dahua</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="benq" onchange="updateSelectedCount()">
+              <label for="benq" class="checkbox-label">BenQ</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="gigabyte" onchange="updateSelectedCount()">
+              <label for="gigabyte" class="checkbox-label">Gigabyte</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="asus2" onchange="updateSelectedCount()">
+              <label for="asus2" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="asus3" onchange="updateSelectedCount()">
+              <label for="asus3" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="asus4" onchange="updateSelectedCount()">
+              <label for="asus4" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="asus5" onchange="updateSelectedCount()">
+              <label for="asus5" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="asus6" onchange="updateSelectedCount()">
+              <label for="asus6" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="asus7" onchange="updateSelectedCount()">
+              <label for="asus7" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="asus8" onchange="updateSelectedCount()">
+              <label for="asus8" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="asus9" onchange="updateSelectedCount()">
+              <label for="asus9" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="asus10" onchange="updateSelectedCount()">
+              <label for="asus10" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="asus11" onchange="updateSelectedCount()">
+              <label for="asus11" class="checkbox-label">Asus</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" class="checkbox-input" id="asus12" onchange="updateSelectedCount()">
+              <label for="asus12" class="checkbox-label">Asus</label>
+            </div>
+          </div>
         </div>
-        
-        <div class="dropdown-content" id="dropdownContent">
+      </div>
+      <div>
+        <div class="dropdown-container">
+          <div class="dropdown-header" onclick="toggleDropdown()">
+            <div class="dropdown-title-container">
+              <span class="dropdown-title">Manufacturer</span>
+              <span class="selected-count let-it-hide" id="selectedCount">(0 selected)</span>
+            </div>
+            <div class="dropdown-arrow" id="dropdownArrow"></div>
+          </div>
+
+          <div class="dropdown-content" id="dropdownContent">
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="asus1" onchange="updateSelectedCount()">
-                <label for="asus1" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="asus1" onchange="updateSelectedCount()">
+              <label for="asus1" class="checkbox-label">Asus</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="lenovo" onchange="updateSelectedCount()">
-                <label for="lenovo" class="checkbox-label">Lenovo</label>
+              <input type="checkbox" class="checkbox-input" id="lenovo" onchange="updateSelectedCount()">
+              <label for="lenovo" class="checkbox-label">Lenovo</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="acer" onchange="updateSelectedCount()">
-                <label for="acer" class="checkbox-label">Acer</label>
+              <input type="checkbox" class="checkbox-input" id="acer" onchange="updateSelectedCount()">
+              <label for="acer" class="checkbox-label">Acer</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="msi" onchange="updateSelectedCount()">
-                <label for="msi" class="checkbox-label">MSI</label>
+              <input type="checkbox" class="checkbox-input" id="msi" onchange="updateSelectedCount()">
+              <label for="msi" class="checkbox-label">MSI</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="dahua" onchange="updateSelectedCount()">
-                <label for="dahua" class="checkbox-label">Dahua</label>
+              <input type="checkbox" class="checkbox-input" id="dahua" onchange="updateSelectedCount()">
+              <label for="dahua" class="checkbox-label">Dahua</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="benq" onchange="updateSelectedCount()">
-                <label for="benq" class="checkbox-label">BenQ</label>
+              <input type="checkbox" class="checkbox-input" id="benq" onchange="updateSelectedCount()">
+              <label for="benq" class="checkbox-label">BenQ</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="gigabyte" onchange="updateSelectedCount()">
-                <label for="gigabyte" class="checkbox-label">Gigabyte</label>
+              <input type="checkbox" class="checkbox-input" id="gigabyte" onchange="updateSelectedCount()">
+              <label for="gigabyte" class="checkbox-label">Gigabyte</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="asus2" onchange="updateSelectedCount()">
-                <label for="asus2" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="asus2" onchange="updateSelectedCount()">
+              <label for="asus2" class="checkbox-label">Asus</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="asus3" onchange="updateSelectedCount()">
-                <label for="asus3" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="asus3" onchange="updateSelectedCount()">
+              <label for="asus3" class="checkbox-label">Asus</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="asus4" onchange="updateSelectedCount()">
-                <label for="asus4" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="asus4" onchange="updateSelectedCount()">
+              <label for="asus4" class="checkbox-label">Asus</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="asus5" onchange="updateSelectedCount()">
-                <label for="asus5" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="asus5" onchange="updateSelectedCount()">
+              <label for="asus5" class="checkbox-label">Asus</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="asus6" onchange="updateSelectedCount()">
-                <label for="asus6" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="asus6" onchange="updateSelectedCount()">
+              <label for="asus6" class="checkbox-label">Asus</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="asus7" onchange="updateSelectedCount()">
-                <label for="asus7" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="asus7" onchange="updateSelectedCount()">
+              <label for="asus7" class="checkbox-label">Asus</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="asus8" onchange="updateSelectedCount()">
-                <label for="asus8" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="asus8" onchange="updateSelectedCount()">
+              <label for="asus8" class="checkbox-label">Asus</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="asus9" onchange="updateSelectedCount()">
-                <label for="asus9" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="asus9" onchange="updateSelectedCount()">
+              <label for="asus9" class="checkbox-label">Asus</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="asus10" onchange="updateSelectedCount()">
-                <label for="asus10" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="asus10" onchange="updateSelectedCount()">
+              <label for="asus10" class="checkbox-label">Asus</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="asus11" onchange="updateSelectedCount()">
-                <label for="asus11" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="asus11" onchange="updateSelectedCount()">
+              <label for="asus11" class="checkbox-label">Asus</label>
             </div>
             <div class="checkbox-item">
-                <input type="checkbox" class="checkbox-input" id="asus12" onchange="updateSelectedCount()">
-                <label for="asus12" class="checkbox-label">Asus</label>
+              <input type="checkbox" class="checkbox-input" id="asus12" onchange="updateSelectedCount()">
+              <label for="asus12" class="checkbox-label">Asus</label>
             </div>
+          </div>
         </div>
-    </div>
       </div>
 
       <script>
         let isCollapsed = false;
 
         function toggleDropdown() {
-            const content = document.getElementById('dropdownContent');
-            const arrow = document.getElementById('dropdownArrow');
-            
-            isCollapsed = !isCollapsed;
-            
-            if (isCollapsed) {
-                content.classList.add('collapsed');
-                arrow.classList.add('collapsed');
-            } else {
-                content.classList.remove('collapsed');
-                arrow.classList.remove('collapsed');
-            }
+          const content = document.getElementById('dropdownContent');
+          const arrow = document.getElementById('dropdownArrow');
+
+          isCollapsed = !isCollapsed;
+
+          if (isCollapsed) {
+            content.classList.add('collapsed');
+            arrow.classList.add('collapsed');
+          } else {
+            content.classList.remove('collapsed');
+            arrow.classList.remove('collapsed');
+          }
         }
 
         function updateSelectedCount() {
-            const checkboxes = document.querySelectorAll('.checkbox-input');
-            const selectedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
-            const countElement = document.getElementById('selectedCount');
-            
-            if (selectedCount === 0) {
-                countElement.textContent = '(0 selected)';
-            } else if (selectedCount === 1) {
-                countElement.textContent = '(1 selected)';
-            } else {
-                countElement.textContent = `(${selectedCount} selected)`;
-            }
+          const checkboxes = document.querySelectorAll('.checkbox-input');
+          const selectedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+          const countElement = document.getElementById('selectedCount');
+
+          if (selectedCount === 0) {
+            countElement.textContent = '(0 selected)';
+          } else if (selectedCount === 1) {
+            countElement.textContent = '(1 selected)';
+          } else {
+            countElement.textContent = `(${selectedCount} selected)`;
+          }
         }
 
         // Get selected values function (useful for form submission)
         function getSelectedManufacturers() {
-            const checkboxes = document.querySelectorAll('.checkbox-input:checked');
-            return Array.from(checkboxes).map(cb => cb.nextElementSibling.textContent);
+          const checkboxes = document.querySelectorAll('.checkbox-input:checked');
+          return Array.from(checkboxes).map(cb => cb.nextElementSibling.textContent);
         }
 
         // Example: Log selected values to console when selection changes
-        document.addEventListener('change', function(e) {
-            if (e.target.classList.contains('checkbox-input')) {
-                console.log('Selected manufacturers:', getSelectedManufacturers());
-            }
+        document.addEventListener('change', function (e) {
+          if (e.target.classList.contains('checkbox-input')) {
+            console.log('Selected manufacturers:', getSelectedManufacturers());
+          }
         });
-    </script>
+      </script>
 
       <!-- <div id="carousel-banner-0" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -280,7 +649,7 @@
           </div>
         </div>
       </div> -->
-      <!-- <script type="text/javascript"><!--
+      <!-- <script type="text/javascript">
         $(document).ready(function() {
           new bootstrap.Carousel(document.querySelector('#carousel-banner-0'), {
             ride: 'carousel',
@@ -288,108 +657,116 @@
             wrap: true
           });
         });
-  //--></script> -->
+      </script> -->
 
     </aside>
 
     <div id="content" class="col">{{ content_top }}
       <h1>{{ heading_title }}</h1>
       {% if image or description %}
-        <div class="row">
-          {% if image %}
-            <div class="col-3"><img src="{{ image }}" alt="{{ heading_title }}" title="{{ heading_title }}" class="img-thumbnail"/></div>
-          {% endif %}
-          {% if description %}
-            <div class="col-9">{{ description }}</div>
-          {% endif %}
-        </div>
-        <hr/>
+      <div class="row">
+        {% if image %}
+        <div class="col-3"><img src="{{ image }}" alt="{{ heading_title }}" title="{{ heading_title }}"
+            class="img-thumbnail" /></div>
+        {% endif %}
+        {% if description %}
+        <div class="col-9">{{ description }}</div>
+        {% endif %}
+      </div>
+      <hr />
       {% endif %}
 
       {% if categories %}
-        <h3>{{ text_refine }}</h3>
-        {% if categories|length <= 5 %}
-          <div class="row">
-            <div class="col-sm-3">
-              <ul>
-                {% for category in categories %}
-                  <li><a href="{{ category.href }}">{{ category.name }}</a></li>
-                {% endfor %}
-              </ul>
-            </div>
-          </div>
-        {% else %}
-          <div class="row row-cols-sm-2 row-cols-lg-4">
-            {% set total = category.children|length %}
-            {% if total > 20 %}
-              {% set batch = (total / 4)|round(0, 'ceil') %}
-            {% else %}
-              {% set batch = 5 %}
-            {% endif %}
-            {% for category in categories|batch(batch) %}
-              <div class="col">
-                <ul>
-                  {% for child in category %}
-                    <li><a href="{{ child.href }}">{{ child.name }}</a></li>
-                  {% endfor %}
-                </ul>
-              </div>
+      <h3>{{ text_refine }}</h3>
+      {% if categories|length <= 5 %} <div class="row">
+        <div class="col-sm-3">
+          <ul>
+            {% for category in categories %}
+            <li><a href="{{ category.href }}">{{ category.name }}</a></li>
             {% endfor %}
-          </div>
-          <br/>
-        {% endif %}
-      {% endif %}
-
-      {% if products %}
-        <div class="row">
-          <div class="col-lg-3">
-            <div class="mb-3">
-              <a href="{{ compare }}" id="compare-total" class="btn btn-primary d-block"><i class="fa-solid fa-arrow-right-arrow-left"></i> <span class="d-none d-xl-inline">{{ text_compare }}</span></a>
-            </div>
-          </div>
-          <div class="col-lg-1 d-none d-lg-block">
-            <div class="btn-group">
-              <button type="button" id="button-list" class="btn btn-light" data-bs-toggle="tooltip" title="{{ button_list }}"><i class="fa-solid fa-table-list"></i></button>
-              <button type="button" id="button-grid" class="btn btn-light" data-bs-toggle="tooltip" title="{{ button_grid }}"><i class="fa-solid fa-table-cells"></i></button>
-            </div>
-          </div>
-          <div class="col-lg-4 offset-lg-1 col-6">
-            <div class="input-group mb-3">
-              <label for="input-sort" class="input-group-text">{{ text_sort }}</label>
-              <select id="input-sort" class="form-select" onchange="location = this.value;">
-                {% for sorts in sorts %}
-                  <option value="{{ sorts.href }}"{% if sorts.value == '%s-%s'|format(sort, order) %} selected{% endif %}>{{ sorts.text }}</option>
-                {% endfor %}
-              </select>
-            </div>
-          </div>
-          <div class="col-lg-3 col-6">
-            <div class="input-group mb-3">
-              <label for="input-limit" class="input-group-text">{{ text_limit }}</label>
-              <select id="input-limit" class="form-select" onchange="location = this.value;">
-                {% for limits in limits %}
-                  <option value="{{ limits.href }}"{% if limits.value == limit %} selected{% endif %}>{{ limits.text }}</option>
-                {% endfor %}
-              </select>
-            </div>
-          </div>
+          </ul>
         </div>
-
-        <div id="product-list" class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4">
-          {% for product in products %}
-            <div class="col mb-3">{{ product }}</div>
+    </div>
+    {% else %}
+    <div class="row row-cols-sm-2 row-cols-lg-4">
+      {% set total = category.children|length %}
+      {% if total > 20 %}
+      {% set batch = (total / 4)|round(0, 'ceil') %}
+      {% else %}
+      {% set batch = 5 %}
+      {% endif %}
+      {% for category in categories|batch(batch) %}
+      <div class="col">
+        <ul>
+          {% for child in category %}
+          <li><a href="{{ child.href }}">{{ child.name }}</a></li>
           {% endfor %}
-        </div>
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+    <br />
+    {% endif %}
+    {% endif %}
 
-        <div class="row">
-          <div class="col-sm-6 text-start">{{ pagination }}</div>
-          <div class="col-sm-6 text-end">{{ results }}</div>
+    {% if products %}
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="mb-3">
+          <a href="{{ compare }}" id="compare-total" class="btn btn-primary d-block"><i
+              class="fa-solid fa-arrow-right-arrow-left"></i> <span class="d-none d-xl-inline">{{ text_compare
+              }}</span></a>
         </div>
-      {% endif %}
-      {% if not categories and not products %}
-        <p>{{ text_no_results }}</p>
-        <div class="text-end"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
-      {% endif %}
-      {{ content_bottom }}</div>
-    {{ column_right }}</div>
+      </div>
+      <div class="col-lg-1 d-none d-lg-block">
+        <div class="btn-group">
+          <button type="button" id="button-list" class="btn btn-light" data-bs-toggle="tooltip"
+            title="{{ button_list }}"><i class="fa-solid fa-table-list"></i></button>
+          <button type="button" id="button-grid" class="btn btn-light" data-bs-toggle="tooltip"
+            title="{{ button_grid }}"><i class="fa-solid fa-table-cells"></i></button>
+        </div>
+      </div>
+      <div class="col-lg-4 offset-lg-1 col-6">
+        <div class="input-group mb-3">
+          <label for="input-sort" class="input-group-text">{{ text_sort }}</label>
+          <select id="input-sort" class="form-select" onchange="location = this.value;">
+            {% for sorts in sorts %}
+            <option value="{{ sorts.href }}" {% if sorts.value=='%s-%s' |format(sort, order) %} selected{% endif %}>{{
+              sorts.text }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <div class="input-group mb-3">
+          <label for="input-limit" class="input-group-text">{{ text_limit }}</label>
+          <select id="input-limit" class="form-select" onchange="location = this.value;">
+            {% for limits in limits %}
+            <option value="{{ limits.href }}" {% if limits.value==limit %} selected{% endif %}>{{ limits.text }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div id="product-list" class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4">
+      {% for product in products %}
+      <div class="col mb-3">{{ product }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6 text-start">{{ pagination }}</div>
+      <div class="col-sm-6 text-end">{{ results }}</div>
+    </div>
+    {% endif %}
+    {% if not categories and not products %}
+    <p>{{ text_no_results }}</p>
+    <div class="text-end"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+    {% endif %}
+    {{ content_bottom }}
+  </div>
+  {{ column_right }}
+</div>
 </div>
