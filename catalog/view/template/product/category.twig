@@ -136,10 +136,14 @@
   }
 
   .row .dropdown-header {
+    height: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 20px;
+    padding-left: 10px;
+    padding-right: 6px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     background: white;
     border-bottom: 1px solid #e0e0e0;
     cursor: pointer;
@@ -154,51 +158,98 @@
   }
 
   .dropdown-arrow {
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 8px solid #666;
-    transition: transform 0.3s ease;
-  }
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  display: flex;
+  align-items: center;
+  transform: rotate(-90deg);
+}
 
   .dropdown-arrow.collapsed {
     transform: rotate(-90deg);
   }
 
+  .dropdown-arrow.expanded {
+  transform: rotate(0deg);
+}
+
   .dropdown-content {
-    overflow-y: auto;
-    transition: max-height 0.3s ease;
+    overflow: hidden;
+    transition: height 0.3s cubic-bezier(0.4,0,0.2,1);
+    height: 0;
   }
 
   .dropdown-content.collapsed {
-    max-height: 0;
+    height: 0;
     overflow: hidden;
+  }
+
+  .dropdown-content.expanded {
+    /* height will be set dynamically in JS */
   }
 
   .checkbox-item {
     display: flex;
     align-items: center;
-    padding: 12px 20px;
+    padding: 5px 10px;
   }
 
   .checkbox-item:last-child {
     border-bottom: none;
   }
 
-  .checkbox-input {
-    width: 18px;
-    height: 18px;
-    margin-right: 12px;
-    cursor: pointer;
-    accent-color: #007bff;
-  }
+  /* Custom checkbox styling */
+.checkbox-input {
+  accent-color: #bbb; /* grey color */
+}
+
+/* Hide the checkmark for checkboxes in modern browsers */
+.checkbox-input:checked {
+  accent-color: #bbb; /* keep grey when checked */
+}
+
+/* For full control, hide the default checkmark and use a custom appearance */
+.checkbox-input {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #ffffff;
+  border: 1px solid rgba(31, 31, 31, 1);
+  
+  border-radius: 4px;
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.checkbox-input:checked {
+  background-color: #bbb;
+  border-color: #bbb;
+}
+
+/* Hide checkmark (no ::after or ::before for checked state) */
+.checkbox-input:checked::after {
+  display: none;
+}
 
   .checkbox-label {
-    font-size: 14px;
+    width: 131px;
     color: #333;
     cursor: pointer;
     flex: 1;
+    padding-left: 5px;
+    
+  }
+
+  .row .checkbox-item label {
+    width: 131px;
+font-weight: 500;
+font-style: Medium;
+font-size: 10px;
+line-height: 20px;
+letter-spacing: 0.1px;
+vertical-align: middle;
+
   }
 
 
@@ -425,7 +476,11 @@
             <span class="dropdown-title">Manufacturer</span>
             <span class="selected-count let-it-hide" id="selectedCount1">(0 selected)</span>
           </div>
-          <div class="dropdown-arrow" id="dropdownArrow1"></div>
+          <div class="dropdown-arrow" id="dropdownArrow1">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+              <polyline points="4,6 8,10 12,6" fill="none" stroke="#666" stroke-width="2"/>
+            </svg>
+          </div>
         </div>
         <div class="dropdown-content" id="dropdownContent1">
           <div class="checkbox-item">
@@ -512,33 +567,37 @@
               <span class="dropdown-title">Screen Size</span>
               <span class="selected-count let-it-hide" id="selectedCount2">(0 selected)</span>
             </div>
-            <div class="dropdown-arrow" id="dropdownArrow2"></div>
+            <div class="dropdown-arrow" id="dropdownArrow2">
+              <svg width="16" height="16" viewBox="0 0 16 16">
+                <polyline points="4,6 8,10 12,6" fill="none" stroke="#666" stroke-width="2"/>
+              </svg>
+            </div>
           </div>
 
           <div class="dropdown-content" id="dropdownContent2">
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="15to17" onchange="updateSelectedCount()">
-              <label for="asus1" class="checkbox-label">15 - 17 inches</label>
+              <input type="checkbox" class="checkbox-input" id="15to17" onchange="updateSelectedCount(2)">
+              <label for="15to17" class="checkbox-label">15 - 17 inches</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="18to20" onchange="updateSelectedCount()">
-              <label for="lenovo" class="checkbox-label">18 - 20 inches</label>
+              <input type="checkbox" class="checkbox-input" id="18to20" onchange="updateSelectedCount(2)">
+              <label for="18to20" class="checkbox-label">18 - 20 inches</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="21to24" onchange="updateSelectedCount()">
-              <label for="acer" class="checkbox-label">21 - 24 inches</label>
+              <input type="checkbox" class="checkbox-input" id="21to24" onchange="updateSelectedCount(2)">
+              <label for="21to24" class="checkbox-label">21 - 24 inches</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="25to30" onchange="updateSelectedCount()">
-              <label for="msi" class="checkbox-label">25 - 30 inches</label>
+              <input type="checkbox" class="checkbox-input" id="25to30" onchange="updateSelectedCount(2)">
+              <label for="25to30" class="checkbox-label">25 - 30 inches</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="31to40" onchange="updateSelectedCount()">
-              <label for="dahua" class="checkbox-label">31 - 40 inches</label>
+              <input type="checkbox" class="checkbox-input" id="31to40" onchange="updateSelectedCount(2)">
+              <label for="31to40" class="checkbox-label">31 - 40 inches</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="40plus" onchange="updateSelectedCount()">
-              <label for="benq" class="checkbox-label">Above 40 inches</label>
+              <input type="checkbox" class="checkbox-input" id="40plus" onchange="updateSelectedCount(2)">
+              <label for="40plus" class="checkbox-label">Above 40 inches</label>
             </div>
             
           </div>
@@ -554,49 +613,53 @@
               <span class="dropdown-title">Refresh Rate</span>
               <span class="selected-count let-it-hide" id="selectedCount3">(0 selected)</span>
             </div>
-            <div class="dropdown-arrow" id="dropdownArrow3"></div>
+            <div class="dropdown-arrow" id="dropdownArrow3">
+              <svg width="16" height="16" viewBox="0 0 16 16">
+                <polyline points="4,6 8,10 12,6" fill="none" stroke="#666" stroke-width="2"/>
+              </svg>
+            </div>
           </div>
 
           <div class="dropdown-content" id="dropdownContent3">
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="60" onchange="updateSelectedCount()">
-              <label for="asus1" class="checkbox-label">60 Hz</label>
+              <input type="checkbox" class="checkbox-input" id="60" onchange="updateSelectedCount(3)">
+              <label for="60" class="checkbox-label">60 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="100" onchange="updateSelectedCount()">
-              <label for="lenovo" class="checkbox-label">100 Hz</label>
+              <input type="checkbox" class="checkbox-input" id="100" onchange="updateSelectedCount(3)">
+              <label for="100" class="checkbox-label">100 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="120" onchange="updateSelectedCount()">
-              <label for="acer" class="checkbox-label">120 Hz</label>
+              <input type="checkbox" class="checkbox-input" id="120" onchange="updateSelectedCount(3)">
+              <label for="120" class="checkbox-label">120 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="144" onchange="updateSelectedCount()">
-              <label for="msi" class="checkbox-label">144 Hz</label>
+              <input type="checkbox" class="checkbox-input" id="144" onchange="updateSelectedCount(3)">
+              <label for="144" class="checkbox-label">144 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="165" onchange="updateSelectedCount()">
-              <label for="dahua" class="checkbox-label">165 Hz</label>
+              <input type="checkbox" class="checkbox-input" id="165" onchange="updateSelectedCount(3)">
+              <label for="165" class="checkbox-label">165 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="170" onchange="updateSelectedCount()">
-              <label for="benq" class="checkbox-label">170 Hz</label>
+              <input type="checkbox" class="checkbox-input" id="170" onchange="updateSelectedCount(3)">
+              <label for="170" class="checkbox-label">170 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="180" onchange="updateSelectedCount()">
-              <label for="benq" class="checkbox-label">180 Hz</label>
+              <input type="checkbox" class="checkbox-input" id="180" onchange="updateSelectedCount(3)">
+              <label for="180" class="checkbox-label">180 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="200" onchange="updateSelectedCount()">
-              <label for="benq" class="checkbox-label">200 Hz</label>
+              <input type="checkbox" class="checkbox-input" id="200" onchange="updateSelectedCount(3)">
+              <label for="200" class="checkbox-label">200 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="240" onchange="updateSelectedCount()">
-              <label for="benq" class="checkbox-label">240 Hz</label>
+              <input type="checkbox" class="checkbox-input" id="240" onchange="updateSelectedCount(3)">
+              <label for="240" class="checkbox-label">240 Hz</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="240plus" onchange="updateSelectedCount()">
-              <label for="benq" class="checkbox-label">Above 240</label>
+              <input type="checkbox" class="checkbox-input" id="240plus" onchange="updateSelectedCount(3)">
+              <label for="240plus" class="checkbox-label">Above 240</label>
             </div>
             
           </div>
@@ -610,8 +673,29 @@
   const content = document.getElementById('dropdownContent' + idx);
   const arrow = document.getElementById('dropdownArrow' + idx);
 
-  content.classList.toggle('collapsed');
-  arrow.classList.toggle('collapsed');
+  if (content.classList.contains('expanded')) {
+    // Animate collapse
+    content.style.height = content.scrollHeight + 'px';
+    setTimeout(() => {
+      content.style.height = '0px';
+    }, 10);
+    content.classList.remove('expanded');
+    arrow.classList.remove('expanded');
+    arrow.classList.add('collapsed');
+  } else {
+    // Animate expand
+    content.style.height = content.scrollHeight + 'px';
+    content.classList.add('expanded');
+    arrow.classList.remove('collapsed');
+    arrow.classList.add('expanded');
+    // Remove height after transition to allow for dynamic content
+    content.addEventListener('transitionend', function handler() {
+      if (content.classList.contains('expanded')) {
+        content.style.height = 'auto';
+      }
+      content.removeEventListener('transitionend', handler);
+    });
+  }
 }
 
 function updateSelectedCount(idx) {
@@ -762,3 +846,4 @@ function updateSelectedCount(idx) {
   {{ column_right }}
 </div>
 </div>
+<!-- {{ footer }} -->
