@@ -3,6 +3,12 @@
     display: none;
   }
 
+  .ma-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+  }
+
   /* Price Range Slider Styles */
   .price-range-container {
     width: 173px;
@@ -10,19 +16,19 @@
     margin: 0 auto;
     background: white;
     padding: 8px;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-radius: 15px;
+    
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
 
   .price-range-title {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 500;
     color: #333;
     margin-bottom: 6px;
-    line-height: 1;
+    line-height: 20px;
   }
 
   .slider-container {
@@ -128,10 +134,10 @@
   .dropdown-container {
     width: 173px;
     max-width: 300px;
-    margin: 20px auto;
+    margin: 0 auto;
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    
     overflow: hidden;
   }
 
@@ -152,29 +158,29 @@
   }
 
   .dropdown-title {
-    font-size: 16px;
+    font-size: 10px;
     font-weight: 500;
     color: #333;
   }
 
   .dropdown-arrow {
-  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
-  display: flex;
-  align-items: center;
-  transform: rotate(-90deg);
-}
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    transform: rotate(-180deg);
+  }
 
   .dropdown-arrow.collapsed {
-    transform: rotate(-90deg);
+    transform: rotate(-180deg);
   }
 
   .dropdown-arrow.expanded {
-  transform: rotate(0deg);
-}
+    transform: rotate(0deg);
+  }
 
   .dropdown-content {
     overflow: hidden;
-    transition: height 0.3s cubic-bezier(0.4,0,0.2,1);
+    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     height: 0;
   }
 
@@ -198,39 +204,41 @@
   }
 
   /* Custom checkbox styling */
-.checkbox-input {
-  accent-color: #bbb; /* grey color */
-}
+  .checkbox-input {
+    accent-color: #bbb;
+    /* grey color */
+  }
 
-/* Hide the checkmark for checkboxes in modern browsers */
-.checkbox-input:checked {
-  accent-color: #bbb; /* keep grey when checked */
-}
+  /* Hide the checkmark for checkboxes in modern browsers */
+  .checkbox-input:checked {
+    accent-color: #bbb;
+    /* keep grey when checked */
+  }
 
-/* For full control, hide the default checkmark and use a custom appearance */
-.checkbox-input {
-  appearance: none;
-  -webkit-appearance: none;
-  background-color: #ffffff;
-  border: 1px solid rgba(31, 31, 31, 1);
-  
-  border-radius: 4px;
-  width: 12px;
-  height: 12px;
-  cursor: pointer;
-  position: relative;
-  transition: background 0.2s, border-color 0.2s;
-}
+  /* For full control, hide the default checkmark and use a custom appearance */
+  .checkbox-input {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #ffffff;
+    border: 1px solid rgba(31, 31, 31, 1);
 
-.checkbox-input:checked {
-  background-color: #bbb;
-  border-color: #bbb;
-}
+    border-radius: 4px;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.2s, border-color 0.2s;
+  }
 
-/* Hide checkmark (no ::after or ::before for checked state) */
-.checkbox-input:checked::after {
-  display: none;
-}
+  .checkbox-input:checked {
+    background-color: #bbb;
+    border-color: #bbb;
+  }
+
+  /* Hide checkmark (no ::after or ::before for checked state) */
+  .checkbox-input:checked::after {
+    display: none;
+  }
 
   .checkbox-label {
     width: 131px;
@@ -238,17 +246,17 @@
     cursor: pointer;
     flex: 1;
     padding-left: 5px;
-    
+
   }
 
   .row .checkbox-item label {
     width: 131px;
-font-weight: 500;
-font-style: Medium;
-font-size: 10px;
-line-height: 20px;
-letter-spacing: 0.1px;
-vertical-align: middle;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 10px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    vertical-align: middle;
 
   }
 
@@ -271,8 +279,8 @@ vertical-align: middle;
   <div class="row">
     <div class="let-it-hide">{{ column_left }}</div>
 
-    <aside id="column-left" class="col-3 d-none d-md-block">
-      <div class="list-group mb-3">
+    <aside id="column-left" class="col-3 d-none d-md-flex flex-column gap-1 p-0">
+      <div class="list-group mb-3 d-none">
         <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=20"
           class="list-group-item">Desktops (13)</a>
         <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=18"
@@ -478,7 +486,7 @@ vertical-align: middle;
           </div>
           <div class="dropdown-arrow" id="dropdownArrow1">
             <svg width="16" height="16" viewBox="0 0 16 16">
-              <polyline points="4,6 8,10 12,6" fill="none" stroke="#666" stroke-width="2"/>
+              <polyline points="4,6 8,10 12,6" fill="none" stroke="#666" stroke-width="2" />
             </svg>
           </div>
         </div>
@@ -560,158 +568,156 @@ vertical-align: middle;
 
       <!-- Screen size drop down -->
 
-      <div>
-        <div class="dropdown-container">
-          <div class="dropdown-header" onclick="toggleDropdown(2)">
-            <div class="dropdown-title-container">
-              <span class="dropdown-title">Screen Size</span>
-              <span class="selected-count let-it-hide" id="selectedCount2">(0 selected)</span>
-            </div>
-            <div class="dropdown-arrow" id="dropdownArrow2">
-              <svg width="16" height="16" viewBox="0 0 16 16">
-                <polyline points="4,6 8,10 12,6" fill="none" stroke="#666" stroke-width="2"/>
-              </svg>
-            </div>
+      <div class="dropdown-container">
+        <div class="dropdown-header" onclick="toggleDropdown(2)">
+          <div class="dropdown-title-container">
+            <span class="dropdown-title">Screen Size</span>
+            <span class="selected-count let-it-hide" id="selectedCount2">(0 selected)</span>
+          </div>
+          <div class="dropdown-arrow" id="dropdownArrow2">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+              <polyline points="4,6 8,10 12,6" fill="none" stroke="#666" stroke-width="2" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="dropdown-content" id="dropdownContent2">
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="15to17" onchange="updateSelectedCount(2)">
+            <label for="15to17" class="checkbox-label">15 - 17 inches</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="18to20" onchange="updateSelectedCount(2)">
+            <label for="18to20" class="checkbox-label">18 - 20 inches</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="21to24" onchange="updateSelectedCount(2)">
+            <label for="21to24" class="checkbox-label">21 - 24 inches</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="25to30" onchange="updateSelectedCount(2)">
+            <label for="25to30" class="checkbox-label">25 - 30 inches</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="31to40" onchange="updateSelectedCount(2)">
+            <label for="31to40" class="checkbox-label">31 - 40 inches</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="40plus" onchange="updateSelectedCount(2)">
+            <label for="40plus" class="checkbox-label">Above 40 inches</label>
           </div>
 
-          <div class="dropdown-content" id="dropdownContent2">
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="15to17" onchange="updateSelectedCount(2)">
-              <label for="15to17" class="checkbox-label">15 - 17 inches</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="18to20" onchange="updateSelectedCount(2)">
-              <label for="18to20" class="checkbox-label">18 - 20 inches</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="21to24" onchange="updateSelectedCount(2)">
-              <label for="21to24" class="checkbox-label">21 - 24 inches</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="25to30" onchange="updateSelectedCount(2)">
-              <label for="25to30" class="checkbox-label">25 - 30 inches</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="31to40" onchange="updateSelectedCount(2)">
-              <label for="31to40" class="checkbox-label">31 - 40 inches</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="40plus" onchange="updateSelectedCount(2)">
-              <label for="40plus" class="checkbox-label">Above 40 inches</label>
-            </div>
-            
-          </div>
         </div>
       </div>
 
       <!-- Refresh rate drop down -->
 
-      <div>
-        <div class="dropdown-container">
-          <div class="dropdown-header" onclick="toggleDropdown(3)">
-            <div class="dropdown-title-container">
-              <span class="dropdown-title">Refresh Rate</span>
-              <span class="selected-count let-it-hide" id="selectedCount3">(0 selected)</span>
-            </div>
-            <div class="dropdown-arrow" id="dropdownArrow3">
-              <svg width="16" height="16" viewBox="0 0 16 16">
-                <polyline points="4,6 8,10 12,6" fill="none" stroke="#666" stroke-width="2"/>
-              </svg>
-            </div>
-          </div>
 
-          <div class="dropdown-content" id="dropdownContent3">
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="60" onchange="updateSelectedCount(3)">
-              <label for="60" class="checkbox-label">60 Hz</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="100" onchange="updateSelectedCount(3)">
-              <label for="100" class="checkbox-label">100 Hz</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="120" onchange="updateSelectedCount(3)">
-              <label for="120" class="checkbox-label">120 Hz</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="144" onchange="updateSelectedCount(3)">
-              <label for="144" class="checkbox-label">144 Hz</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="165" onchange="updateSelectedCount(3)">
-              <label for="165" class="checkbox-label">165 Hz</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="170" onchange="updateSelectedCount(3)">
-              <label for="170" class="checkbox-label">170 Hz</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="180" onchange="updateSelectedCount(3)">
-              <label for="180" class="checkbox-label">180 Hz</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="200" onchange="updateSelectedCount(3)">
-              <label for="200" class="checkbox-label">200 Hz</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="240" onchange="updateSelectedCount(3)">
-              <label for="240" class="checkbox-label">240 Hz</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" class="checkbox-input" id="240plus" onchange="updateSelectedCount(3)">
-              <label for="240plus" class="checkbox-label">Above 240</label>
-            </div>
-            
+      <div class="dropdown-container">
+        <div class="dropdown-header" onclick="toggleDropdown(3)">
+          <div class="dropdown-title-container">
+            <span class="dropdown-title">Refresh Rate</span>
+            <span class="selected-count let-it-hide" id="selectedCount3">(0 selected)</span>
+          </div>
+          <div class="dropdown-arrow" id="dropdownArrow3">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+              <polyline points="4,6 8,10 12,6" fill="none" stroke="#666" stroke-width="2" />
+            </svg>
           </div>
         </div>
+
+        <div class="dropdown-content" id="dropdownContent3">
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="60" onchange="updateSelectedCount(3)">
+            <label for="60" class="checkbox-label">60 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="100" onchange="updateSelectedCount(3)">
+            <label for="100" class="checkbox-label">100 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="120" onchange="updateSelectedCount(3)">
+            <label for="120" class="checkbox-label">120 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="144" onchange="updateSelectedCount(3)">
+            <label for="144" class="checkbox-label">144 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="165" onchange="updateSelectedCount(3)">
+            <label for="165" class="checkbox-label">165 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="170" onchange="updateSelectedCount(3)">
+            <label for="170" class="checkbox-label">170 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="180" onchange="updateSelectedCount(3)">
+            <label for="180" class="checkbox-label">180 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="200" onchange="updateSelectedCount(3)">
+            <label for="200" class="checkbox-label">200 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="240" onchange="updateSelectedCount(3)">
+            <label for="240" class="checkbox-label">240 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="240plus" onchange="updateSelectedCount(3)">
+            <label for="240plus" class="checkbox-label">Above 240</label>
+          </div>
+
+        </div>
       </div>
+
 
       <script>
         let isCollapsed = false;
 
         function toggleDropdown(idx) {
-  const content = document.getElementById('dropdownContent' + idx);
-  const arrow = document.getElementById('dropdownArrow' + idx);
+          const content = document.getElementById('dropdownContent' + idx);
+          const arrow = document.getElementById('dropdownArrow' + idx);
 
-  if (content.classList.contains('expanded')) {
-    // Animate collapse
-    content.style.height = content.scrollHeight + 'px';
-    setTimeout(() => {
-      content.style.height = '0px';
-    }, 10);
-    content.classList.remove('expanded');
-    arrow.classList.remove('expanded');
-    arrow.classList.add('collapsed');
-  } else {
-    // Animate expand
-    content.style.height = content.scrollHeight + 'px';
-    content.classList.add('expanded');
-    arrow.classList.remove('collapsed');
-    arrow.classList.add('expanded');
-    // Remove height after transition to allow for dynamic content
-    content.addEventListener('transitionend', function handler() {
-      if (content.classList.contains('expanded')) {
-        content.style.height = 'auto';
-      }
-      content.removeEventListener('transitionend', handler);
-    });
-  }
-}
+          if (content.classList.contains('expanded')) {
+            // Animate collapse
+            content.style.height = content.scrollHeight + 'px';
+            setTimeout(() => {
+              content.style.height = '0px';
+            }, 10);
+            content.classList.remove('expanded');
+            arrow.classList.remove('expanded');
+            arrow.classList.add('collapsed');
+          } else {
+            // Animate expand
+            content.style.height = content.scrollHeight + 'px';
+            content.classList.add('expanded');
+            arrow.classList.remove('collapsed');
+            arrow.classList.add('expanded');
+            // Remove height after transition to allow for dynamic content
+            content.addEventListener('transitionend', function handler() {
+              if (content.classList.contains('expanded')) {
+                content.style.height = 'auto';
+              }
+              content.removeEventListener('transitionend', handler);
+            });
+          }
+        }
 
-function updateSelectedCount(idx) {
-  const container = document.getElementById('dropdownContent' + idx);
-  const checkboxes = container.querySelectorAll('.checkbox-input');
-  const selectedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
-  const countElement = document.getElementById('selectedCount' + idx);
+        function updateSelectedCount(idx) {
+          const container = document.getElementById('dropdownContent' + idx);
+          const checkboxes = container.querySelectorAll('.checkbox-input');
+          const selectedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+          const countElement = document.getElementById('selectedCount' + idx);
 
-  if (selectedCount === 0) {
-    countElement.textContent = '(0 selected)';
-  } else if (selectedCount === 1) {
-    countElement.textContent = '(1 selected)';
-  } else {
-    countElement.textContent = `(${selectedCount} selected)`;
-  }
-}
+          if (selectedCount === 0) {
+            countElement.textContent = '(0 selected)';
+          } else if (selectedCount === 1) {
+            countElement.textContent = '(1 selected)';
+          } else {
+            countElement.textContent = `(${selectedCount} selected)`;
+          }
+        }
       </script>
 
       <!-- <div id="carousel-banner-0" class="carousel slide carousel-fade" data-bs-ride="carousel">
