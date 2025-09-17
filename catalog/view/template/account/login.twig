@@ -1,58 +1,301 @@
-{{ header }}
+{{header}}
+<style>
+.login-container-custom {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 400px;
+    margin: 40px auto;
+    
+}
+
+.login-header-custom {
+    background: #2c2c2c;
+    color: white;
+    padding: 24px;
+    text-align: center;
+  
+}
+
+.login-header-custom h2{
+
+  color: white;
+}
+
+.user-icon-custom {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 18px;
+}
+
+.login-header-custom h2 {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.login-form-custom {
+    padding: 32px;
+}
+
+.form-group-custom {
+    margin-bottom: 20px;
+}
+
+.form-label-custom {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.required-custom {
+    color: #e74c3c;
+}
+
+.form-input-custom {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-input-custom:focus {
+    border-color: #ffc107;
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.1);
+}
+
+.password-group-custom {
+    position: relative;
+}
+
+.password-toggle-custom {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #6c757d;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 4px;
+}
+
+.forgot-password-custom {
+    display: block;
+    text-align: right;
+    margin-top: 8px;
+    color: #6c757d;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.forgot-password-custom:hover {
+    color: #495057;
+}
+
+.login-button-custom {
+    width: 100%;
+    padding: 14px;
+    background: white;
+    color: #FFBB00;
+    border:2px solid #FFBB00;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+}
+
+.login-button-custom:hover {
+    background: #FFBB00;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+.signup-link-custom {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #e9ecef;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.signup-link-custom a {
+    color: #ffc107;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.signup-link-custom a:hover {
+    color: #ffb300;
+}
+
+.alert-custom {
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.alert-success-custom {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.alert-danger-custom {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+
+
+body {
+    background-color: #f5f5f5;
+}
+
+@media (max-width: 480px) {
+    .login-container-custom {
+        margin: 10px;
+        border-radius: 8px;
+    }
+    
+    .login-form-custom {
+        padding: 24px;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+  .login-container-custom {
+    margin: 0;
+  }
+
+  .login-header-custom {
+    background: none;
+  }
+
+  .login-header-custom .user-icon-custom {
+    display: none;
+  }
+
+  .login-header-custom h2 {
+    color: #000;
+  }
+}
+</style>
+
+
 <div id="account-login" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-      <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
-  {% if success %}
-    <div class="alert alert-success alert-dismissible"><i class="fa-solid fa-circle-check"></i> {{ success }} <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
-  {% endif %}
-  {% if error_warning %}
-    <div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> {{ error_warning }} <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
-  {% endif %}
-  <div class="row">
-    {{ column_left }}
-    <div id="content" class="col">
-      {{ content_top }}
-      <div class="row">
-        <div class="col mb-3">
-          <div class="border rounded p-3 d-flex flex-column h-100">
-            <h2>{{ text_new_customer }}</h2>
-            <p><strong>{{ text_register }}</strong></p>
-            <p>{{ text_register_account }}</p>
-            <div class="text-end">
-              <a href="{{ register }}" class="btn btn-primary">{{ button_continue }}</a>
-            </div>
-          </div>
-        </div>
-        <div class="col mb-3">
-          <div class="border rounded p-3 d-flex flex-column h-100">
-            <form id="form-login" action="{{ login }}" method="post" data-oc-toggle="ajax">
-              <h2>{{ text_returning_customer }}</h2>
-              <p><strong>{{ text_i_am_returning_customer }}</strong></p>
-              <div class="mb-3">
-                <label for="input-email" class="col-form-label">{{ entry_email }}</label>
-                <input type="email" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email" class="form-control"/>
-              </div>
-              <div class="mb-3">
-                <label for="input-password" class="col-form-label">{{ entry_password }}</label>
-                <input type="password" name="password" value="{{ password }}" placeholder="{{ entry_password }}" id="input-password" class="form-control mb-1"/>
-                <a href="{{ forgotten }}">{{ text_forgotten }}</a>
-              </div>
-              {% if redirect %}
-                <input type="hidden" name="redirect" value="{{ redirect }}"/>
-              {% endif %}
-              <div class="text-end">
-                <button type="submit" class="btn btn-primary">{{ button_login }}</button>
-              </div>
-            </form>
-          </div>
-        </div>
+  <div class="login-container-custom">
+    <div class="login-header-custom">
+      <div class="user-icon-custom">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
       </div>
-      {{ content_bottom }}
+      <h2>Account Login</h2>
     </div>
-    {{ column_right }}
+
+    <div class="login-form-custom">
+      {% if success %}
+        <div class="alert-custom alert-success-custom">
+          <i class="fa-solid fa-circle-check"></i> {{ success }}
+        </div>
+      {% endif %}
+      
+      {% if error_warning %}
+        <div class="alert-custom alert-danger-custom">
+          <i class="fa-solid fa-circle-exclamation"></i> {{ error_warning }}
+        </div>
+      {% endif %}
+
+      <form id="form-login" action="{{ login }}" method="post" data-oc-toggle="ajax">
+        <div class="form-group-custom">
+          <label for="input-email" class="form-label-custom">
+            Email or Phone <span class="required-custom">*</span>
+          </label>
+          <input 
+            type="email" 
+            name="email" 
+            value="{{ email }}" 
+            placeholder="Email Address or Phone Number" 
+            id="input-email" 
+            class="form-input-custom"
+            required
+          />
+        </div>
+
+        <div class="form-group-custom">
+          <label for="input-password" class="form-label-custom">
+            Password <span class="required-custom">*</span>
+          </label>
+          <div class="password-group-custom">
+            <input 
+              type="password" 
+              name="password" 
+              value="{{ password }}" 
+              placeholder="Password" 
+              id="input-password" 
+              class="form-input-custom"
+              required
+            />
+            <button type="button" class="password-toggle-custom" onclick="togglePasswordCustom()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" id="eye-icon-custom">
+                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+              </svg>
+            </button>
+          </div>
+          <a href="{{ forgotten }}" class="forgot-password-custom">Forgot Password?</a>
+        </div>
+
+        {% if redirect %}
+          <input type="hidden" name="redirect" value="{{ redirect }}"/>
+        {% endif %}
+
+        <button type="submit" class="login-button-custom">Log In</button>
+
+        <div class="signup-link-custom">
+          Don't have an account? <a href="index.php?route=account/register&language=en-gb">Sign up</a>
+          </br>
+          Get back to home <a href="index.php?route=common/home">Home</a>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
-{{ footer }}
+
+<script>
+function togglePasswordCustom() {
+    const passwordInput = document.getElementById('input-password');
+    const eyeIcon = document.getElementById('eye-icon-custom');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        eyeIcon.innerHTML = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>';
+    } else {
+        passwordInput.type = 'password';
+        eyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
+    }
+}
+</script>

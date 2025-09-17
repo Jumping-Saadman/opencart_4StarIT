@@ -1,144 +1,1777 @@
 {{ header }}
+
+<style>
+/* sidebar by Saadman */
+.ma-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+  }
+
+  /* Price Range Slider Styles */
+  .price-range-container {
+    width: 173px;
+    height: 91.55px;
+    margin: 0 auto;
+    background: white;
+    padding: 8px;
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .price-range-title {
+    font-size: 10px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+    line-height: 20px;
+  }
+
+  .slider-container {
+    position: relative;
+    margin: 4px 0;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .slider-track {
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    right: 4px;
+    height: 2px;
+    background-color: #e0e0e0;
+    border-radius: 1px;
+    transform: translateY(-50%);
+  }
+
+  .slider-range {
+    position: absolute;
+    height: 2px;
+    background-color: #ff9500;
+    border-radius: 1px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .slider-handle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #333;
+    border-radius: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    transition: box-shadow 0.2s ease, transform 0.1s ease;
+    z-index: 2;
+  }
+
+  .slider-handle:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .slider-handle:active {
+    cursor: grabbing;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .input-container {
+    display: flex;
+    gap: 6px;
+    margin-top: 0;
+  }
+
+  .input-wrapper {
+    flex: 1;
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 4px 6px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    font-size: 10px;
+    color: #333;
+    background-color: #fafafa;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    text-align: center;
+    height: 24px;
+  }
+
+  .input-field:focus {
+    outline: none;
+    border-color: #ff9500;
+    background-color: white;
+  }
+
+  .input-field:hover {
+    border-color: #bbb;
+  }
+
+  /* Hidden range inputs for accessibility */
+  .hidden-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .demo-info {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  /* Dropdown Checklist Styles */
+  .dropdown-container {
+    width: 173px;
+    max-width: 300px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+
+    overflow: hidden;
+  }
+
+  .row .dropdown-header {
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 6px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .dropdown-title {
+    font-size: 10px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .dropdown-arrow {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    transform: rotate(-180deg);
+  }
+
+  .dropdown-arrow.collapsed {
+    transform: rotate(-180deg);
+  }
+
+  .dropdown-arrow.expanded {
+    transform: rotate(0deg);
+  }
+
+  .dropdown-content {
+    overflow: hidden;
+    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 0;
+  }
+
+  .dropdown-content.collapsed {
+    height: 0;
+    overflow: hidden;
+  }
+
+  .dropdown-content.expanded {
+    /* height will be set dynamically in JS */
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+  }
+
+  .checkbox-item:last-child {
+    border-bottom: none;
+  }
+
+  /* Custom checkbox styling */
+  .checkbox-input {
+    accent-color: #bbb;
+    /* grey color */
+  }
+
+  /* Hide the checkmark for checkboxes in modern browsers */
+  .checkbox-input:checked {
+    accent-color: #bbb;
+    /* keep grey when checked */
+  }
+
+  /* For full control, hide the default checkmark and use a custom appearance */
+  .checkbox-input {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #ffffff;
+    border: 1px solid rgba(31, 31, 31, 1);
+
+    border-radius: 4px;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .checkbox-input:checked {
+    background-color: #bbb;
+    border-color: #bbb;
+  }
+
+  /* Hide checkmark (no ::after or ::before for checked state) */
+  .checkbox-input:checked::after {
+    display: none;
+  }
+
+  .checkbox-label {
+    width: 131px;
+    color: #333;
+    cursor: pointer;
+    flex: 1;
+    padding-left: 5px;
+
+  }
+
+  .row .checkbox-item label {
+    width: 131px;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 10px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    vertical-align: middle;
+
+  }
+
+
+  /* Selected count indicator */
+  .selected-count {
+    font-size: 12px;
+    color: #666;
+    margin-left: 8px;
+  }
+
+
+/* Exact Figma Design Implementation */
+
+.let-it-hide {
+    display: none;
+  }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f8f9fa;
+  color: #1f1f1f;
+}
+
+.main-container {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 0 110px;
+  background-color: #f8f9fa;
+}
+
+.middle-container {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+/* Left Column - Filters - Exact Figma Match */
+.left-column {
+  width: 173px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.filter-main-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #1f1f1f;
+  letter-spacing: 0.2px;
+}
+
+.clear-all-btn {
+  background: none;
+  border: none;
+  color: #666;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 9px;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.clear-all-btn:hover {
+  color: #1f1f1f;
+}
+
+.filter-count {
+  background: #1f1f1f;
+  color: white;
+  border-radius: 10px;
+  padding: 2px 6px;
+  font-size: 8px;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.filter-section {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 15px;
+  border-bottom: 0.5px solid #e0e0e0;
+  background: white;
+}
+
+.filter-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  color: #1f1f1f;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+}
+
+.filter-header .arrow {
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  font-size: 10px;
+  color: #666;
+  transition: transform 0.2s ease;
+}
+
+.filter-header .arrow.collapsed {
+  transform: rotate(-90deg);
+}
+
+.filter-list {
+  padding: 0;
+  background: white;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-bottom: 0.5px solid #f5f5f5;
+}
+
+.filter-item:last-child {
+  border-bottom: none;
+}
+
+.filter-item:hover {
+  background-color: #f8f9fa;
+}
+
+.filter-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #333;
+  letter-spacing: 0.1px;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.filter-checkbox {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid #ccc;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.filter-checkbox:hover {
+  border-color: #1f1f1f;
+}
+
+.filter-checkbox.checked {
+  background-color: #1f1f1f;
+  border-color: #1f1f1f;
+}
+
+.filter-checkbox.checked::after {
+  content: '✓';
+  position: absolute;
+  top: -1px;
+  left: 2px;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* Price Range Section - Figma Design */
+.price-section {
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.price-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  color: #1f1f1f;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+.price-range-container {
+  margin-bottom: 15px;
+}
+
+.price-range {
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  margin-bottom: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.price-range::before {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 70%;
+  top: 0;
+  bottom: 0;
+  background: #1f1f1f;
+  border-radius: 3px;
+}
+
+.price-range::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  top: -3px;
+  width: 12px;
+  height: 12px;
+  background: #1f1f1f;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.price-inputs {
+  display: flex;
+  gap: 8px;
+}
+
+.price-input {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #333;
+  text-align: center;
+  background: #fafafa;
+  transition: border-color 0.2s ease;
+}
+
+.price-input:focus {
+  outline: none;
+  border-color: #1f1f1f;
+  background: white;
+}
+
+.price-input::placeholder {
+  color: #999;
+}
+
+/* Right Column - Products */
+.right-column {
+  flex: 1;
+  width: 1037px;
+}
+
+.upper-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  height: 38px;
+}
+
+.page-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  color: #1f1f1f;
+  letter-spacing: 0.1px;
+  line-height: 20px;
+}
+
+.controls-right {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.show-control,
+.sort-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.control-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  color: #1f1f1f;
+  letter-spacing: 0.1px;
+  line-height: 20px;
+}
+
+.control-select {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 7px;
+  color: #1f1f1f;
+  min-width: 40px;
+  position: relative;
+}
+
+.control-select::after {
+  content: '▼';
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 6px;
+  pointer-events: none;
+}
+
+/* Products Grid */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.product-card {
+  width: 255.5px;
+  height: 490.46px;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Pagination */
+.lower-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 58px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagination a,
+.pagination span {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 8px;
+  color: #1f1f1f;
+  text-decoration: none;
+  padding: 10px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.pagination a:hover,
+.pagination .current {
+  background-color: #1f1f1f;
+  color: white;
+}
+
+.results-info {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  color: #1f1f1f;
+  letter-spacing: 0.1px;
+  line-height: 20px;
+}
+
+/* Touch and Mobile Enhancements */
+.filter-item.touch-active {
+  background-color: #e0e0e0;
+  transform: scale(0.98);
+}
+
+.filter-checkbox.checked {
+  background-color: #1f1f1f;
+}
+
+.filter-checkbox.checked::after {
+  content: '✓';
+  position: absolute;
+  top: -2px;
+  left: 1px;
+  color: white;
+  font-size: 8px;
+}
+
+/* Mobile Collapsed State */
+.left-column.mobile-collapsed {
+  position: fixed;
+  top: 0;
+  left: -173px;
+  height: 100vh;
+  background: white;
+  z-index: 1000;
+  transition: left 0.3s ease;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.left-column.mobile-collapsed.show {
+  left: 0;
+}
+
+/* Mobile Filter Toggle Button */
+.mobile-filter-toggle {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+  background: #1f1f1f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 1440px) {
+  .main-container {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .middle-container {
+    flex-direction: column;
+  }
+  
+  .left-column {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px 0;
+  }
+  
+  .filter-section {
+    min-width: 200px;
+    flex-shrink: 0;
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .right-column {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-filter-toggle {
+    display: block;
+    position: relative;
+    margin-bottom: 15px;
+    background: #1f1f1f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .left-column {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 300px;
+    height: 100vh;
+    background: white;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.15);
+    flex-direction: column;
+    padding: 25px 20px;
+    overflow-y: auto;
+  }
+  
+  .left-column.show {
+    left: 0;
+  }
+  
+  .filter-header-section {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+  }
+  
+  .filter-main-title {
+    font-size: 16px;
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .product-card {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+  }
+  
+  .upper-section {
+    flex-direction: column;
+    gap: 15px;
+    height: auto;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .controls-right {
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .page-title {
+    font-size: 14px;
+  }
+  
+  .control-label {
+    font-size: 12px;
+  }
+  
+  .control-select {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .product-card {
+    width: 100%;
+    height: auto;
+    min-height: 250px;
+  }
+  
+  .controls-right {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+  
+  .show-control,
+  .sort-control {
+    justify-content: space-between;
+  }
+  
+  .control-select {
+    min-width: 80px;
+  }
+  
+  .pagination {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+  .pagination a,
+  .pagination span {
+    padding: 8px 6px;
+    font-size: 10px;
+  }
+  
+  .results-info {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .main-container {
+    padding: 0 10px;
+  }
+  
+  .left-column {
+    width: 100%;
+    left: -100%;
+  }
+  
+  .mobile-filter-toggle {
+    left: 10px;
+    top: 10px;
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+  
+  .filter-section {
+    margin-bottom: 15px;
+  }
+  
+  .filter-title {
+    font-size: 12px;
+  }
+  
+  .filter-label {
+    font-size: 12px;
+  }
+}
+</style>
+
 <div id="product-search" class="container">
   <ul class="breadcrumb">
     {% for breadcrumb in breadcrumbs %}
       <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
     {% endfor %}
   </ul>
+  
   <div class="row">
     {{ column_left }}
+
+    <aside id="column-left" class="col-3 d-none d-md-flex flex-column gap-1 p-0">
+      <div class="list-group mb-3 d-none">
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=20"
+          class="list-group-item">Desktops (13)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=18"
+          class="list-group-item">Laptops &amp; Notebooks (5)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=25"
+          class="list-group-item">Components (2)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=57"
+          class="list-group-item active">Tablets (1)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=17"
+          class="list-group-item">Software (0)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=24"
+          class="list-group-item">Phones &amp; PDAs (3)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=33"
+          class="list-group-item">Cameras (2)</a>
+        <a href="http://localhost/upload/index.php?route=product/category&amp;language=en-gb&amp;path=34"
+          class="list-group-item">MP3 Players (4)</a>
+      </div>
+
+      <!-- Price range slider -->
+
+      <div class="price-range-container">
+        <h2 class="price-range-title">Price Range</h2>
+
+        <div class="slider-container">
+          <div class="slider-track"></div>
+          <div class="slider-range" id="sliderRange"></div>
+          <div class="slider-handle" id="minHandle"></div>
+          <div class="slider-handle" id="maxHandle"></div>
+        </div>
+
+        <div class="input-container">
+          <div class="input-wrapper">
+            <input type="text" class="input-field" id="minInput" placeholder="0">
+          </div>
+          <div class="input-wrapper">
+            <input type="text" class="input-field" id="maxInput" placeholder="500,000">
+          </div>
+        </div>
+      </div>
+
+      <script>
+        class PriceRangeSlider {
+          constructor() {
+            this.minValue = 0;
+            this.maxValue = 500000;
+            this.currentMin = 0;
+            this.currentMax = 437000;
+
+            this.slider = document.querySelector('.slider-container');
+            this.minHandle = document.getElementById('minHandle');
+            this.maxHandle = document.getElementById('maxHandle');
+            this.sliderRange = document.getElementById('sliderRange');
+            this.minInput = document.getElementById('minInput');
+            this.maxInput = document.getElementById('maxInput');
+
+            this.isDragging = false;
+            this.activeHandle = null;
+
+            this.init();
+          }
+
+          init() {
+            this.updateDisplay();
+            this.bindEvents();
+          }
+
+          bindEvents() {
+            // Handle dragging
+            this.minHandle.addEventListener('mousedown', (e) => this.startDrag(e, 'min'));
+            this.maxHandle.addEventListener('mousedown', (e) => this.startDrag(e, 'max'));
+
+            document.addEventListener('mousemove', (e) => this.drag(e));
+            document.addEventListener('mouseup', () => this.stopDrag());
+
+            // Handle input changes
+            this.minInput.addEventListener('input', (e) => this.updateFromInput('min', e.target.value));
+            this.maxInput.addEventListener('input', (e) => this.updateFromInput('max', e.target.value));
+
+            // Handle input blur (format numbers)
+            this.minInput.addEventListener('blur', () => this.formatInput('min'));
+            this.maxInput.addEventListener('blur', () => this.formatInput('max'));
+
+            // Prevent text selection during drag
+            document.addEventListener('selectstart', (e) => {
+              if (this.isDragging) e.preventDefault();
+            });
+          }
+
+          startDrag(e, handle) {
+            this.isDragging = true;
+            this.activeHandle = handle;
+            document.body.style.cursor = 'grabbing';
+            e.preventDefault();
+          }
+
+          drag(e) {
+            if (!this.isDragging || !this.activeHandle) return;
+
+            const rect = this.slider.getBoundingClientRect();
+            const sliderWidth = rect.width - 8; // Account for handle padding
+            const percentage = Math.max(0, Math.min(1, (e.clientX - rect.left - 4) / sliderWidth));
+            const value = Math.round(this.minValue + percentage * (this.maxValue - this.minValue));
+
+            if (this.activeHandle === 'min') {
+              this.currentMin = Math.min(value, this.currentMax - 1000); // Minimum gap of 1000
+            } else {
+              this.currentMax = Math.max(value, this.currentMin + 1000); // Minimum gap of 1000
+            }
+
+            this.updateDisplay();
+          }
+
+          stopDrag() {
+            this.isDragging = false;
+            this.activeHandle = null;
+            document.body.style.cursor = '';
+          }
+
+          updateFromInput(type, value) {
+            // Remove any non-digit characters except commas
+            const cleanValue = value.replace(/[^\d,]/g, '');
+            const numValue = parseInt(cleanValue.replace(/,/g, '')) || 0;
+
+            if (type === 'min') {
+              this.currentMin = Math.max(this.minValue, Math.min(numValue, this.currentMax - 1000));
+            } else {
+              this.currentMax = Math.min(this.maxValue, Math.max(numValue, this.currentMin + 1000));
+            }
+
+            this.updateDisplay();
+          }
+
+          formatInput(type) {
+            if (type === 'min') {
+              this.minInput.value = this.formatNumber(this.currentMin);
+            } else {
+              this.maxInput.value = this.formatNumber(this.currentMax);
+            }
+          }
+
+          updateDisplay() {
+            // Update handle positions
+            const minPercent = (this.currentMin - this.minValue) / (this.maxValue - this.minValue);
+            const maxPercent = (this.currentMax - this.minValue) / (this.maxValue - this.minValue);
+
+            this.minHandle.style.left = `${minPercent * 100}%`;
+            this.maxHandle.style.left = `${maxPercent * 100}%`;
+
+            // Update range bar
+            this.sliderRange.style.left = `${minPercent * 100}%`;
+            this.sliderRange.style.width = `${(maxPercent - minPercent) * 100}%`;
+
+            // Update input values
+            this.minInput.value = this.formatNumber(this.currentMin);
+            this.maxInput.value = this.formatNumber(this.currentMax);
+          }
+
+          formatNumber(num) {
+            return num.toLocaleString();
+          }
+
+          // Public method to get current values
+          getValues() {
+            return {
+              min: this.currentMin,
+              max: this.currentMax
+            };
+          }
+
+          // Public method to set values
+          setValues(min, max) {
+            this.currentMin = Math.max(this.minValue, Math.min(min, this.maxValue));
+            this.currentMax = Math.max(this.minValue, Math.min(max, this.maxValue));
+
+            // Ensure minimum gap
+            if (this.currentMax - this.currentMin < 1000) {
+              if (min !== this.currentMin) {
+                this.currentMax = this.currentMin + 1000;
+              } else {
+                this.currentMin = this.currentMax - 1000;
+              }
+            }
+
+            this.updateDisplay();
+          }
+        }
+
+        // Initialize the slider
+        const priceSlider = new PriceRangeSlider();
+
+        // Example of how to use the slider programmatically
+        window.addEventListener('load', () => {
+          console.log('Initial values:', priceSlider.getValues());
+        });
+      </script>
+
+      <!-- Manufacturer Dropdown -->
+      <div class="dropdown-container">
+        <div class="dropdown-header" onclick="toggleDropdown(1)">
+          <div class="dropdown-title-container">
+            <span class="dropdown-title">Manufacturer</span>
+            <span class="selected-count let-it-hide" id="selectedCount1">(0 selected)</span>
+          </div>
+          <div class="dropdown-arrow" id="dropdownArrow1">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+              <polyline points="4,6 8,10 12,6" fill="none" stroke="#666" stroke-width="2" />
+            </svg>
+          </div>
+        </div>
+        <div class="dropdown-content" id="dropdownContent1">
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus1" onchange="updateSelectedCount()">
+            <label for="asus1" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="lenovo" onchange="updateSelectedCount()">
+            <label for="lenovo" class="checkbox-label">Lenovo</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="acer" onchange="updateSelectedCount()">
+            <label for="acer" class="checkbox-label">Acer</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="msi" onchange="updateSelectedCount()">
+            <label for="msi" class="checkbox-label">MSI</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="dahua" onchange="updateSelectedCount()">
+            <label for="dahua" class="checkbox-label">Dahua</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="benq" onchange="updateSelectedCount()">
+            <label for="benq" class="checkbox-label">BenQ</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="gigabyte" onchange="updateSelectedCount()">
+            <label for="gigabyte" class="checkbox-label">Gigabyte</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus2" onchange="updateSelectedCount()">
+            <label for="asus2" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus3" onchange="updateSelectedCount()">
+            <label for="asus3" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus4" onchange="updateSelectedCount()">
+            <label for="asus4" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus5" onchange="updateSelectedCount()">
+            <label for="asus5" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus6" onchange="updateSelectedCount()">
+            <label for="asus6" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus7" onchange="updateSelectedCount()">
+            <label for="asus7" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus8" onchange="updateSelectedCount()">
+            <label for="asus8" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus9" onchange="updateSelectedCount()">
+            <label for="asus9" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus10" onchange="updateSelectedCount()">
+            <label for="asus10" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus11" onchange="updateSelectedCount()">
+            <label for="asus11" class="checkbox-label">Asus</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="asus12" onchange="updateSelectedCount()">
+            <label for="asus12" class="checkbox-label">Asus</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen size drop down -->
+
+      <div class="dropdown-container">
+        <div class="dropdown-header" onclick="toggleDropdown(2)">
+          <div class="dropdown-title-container">
+            <span class="dropdown-title">Screen Size</span>
+            <span class="selected-count let-it-hide" id="selectedCount2">(0 selected)</span>
+          </div>
+          <div class="dropdown-arrow" id="dropdownArrow2">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+              <polyline points="4,6 8,10 12,6" fill="none" stroke="#666" stroke-width="2" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="dropdown-content" id="dropdownContent2">
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="15to17" onchange="updateSelectedCount(2)">
+            <label for="15to17" class="checkbox-label">15 - 17 inches</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="18to20" onchange="updateSelectedCount(2)">
+            <label for="18to20" class="checkbox-label">18 - 20 inches</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="21to24" onchange="updateSelectedCount(2)">
+            <label for="21to24" class="checkbox-label">21 - 24 inches</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="25to30" onchange="updateSelectedCount(2)">
+            <label for="25to30" class="checkbox-label">25 - 30 inches</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="31to40" onchange="updateSelectedCount(2)">
+            <label for="31to40" class="checkbox-label">31 - 40 inches</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="40plus" onchange="updateSelectedCount(2)">
+            <label for="40plus" class="checkbox-label">Above 40 inches</label>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Refresh rate drop down -->
+
+
+      <div class="dropdown-container">
+        <div class="dropdown-header" onclick="toggleDropdown(3)">
+          <div class="dropdown-title-container">
+            <span class="dropdown-title">Refresh Rate</span>
+            <span class="selected-count let-it-hide" id="selectedCount3">(0 selected)</span>
+          </div>
+          <div class="dropdown-arrow" id="dropdownArrow3">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+              <polyline points="4,6 8,10 12,6" fill="none" stroke="#666" stroke-width="2" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="dropdown-content" id="dropdownContent3">
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="60" onchange="updateSelectedCount(3)">
+            <label for="60" class="checkbox-label">60 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="100" onchange="updateSelectedCount(3)">
+            <label for="100" class="checkbox-label">100 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="120" onchange="updateSelectedCount(3)">
+            <label for="120" class="checkbox-label">120 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="144" onchange="updateSelectedCount(3)">
+            <label for="144" class="checkbox-label">144 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="165" onchange="updateSelectedCount(3)">
+            <label for="165" class="checkbox-label">165 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="170" onchange="updateSelectedCount(3)">
+            <label for="170" class="checkbox-label">170 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="180" onchange="updateSelectedCount(3)">
+            <label for="180" class="checkbox-label">180 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="200" onchange="updateSelectedCount(3)">
+            <label for="200" class="checkbox-label">200 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="240" onchange="updateSelectedCount(3)">
+            <label for="240" class="checkbox-label">240 Hz</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" id="240plus" onchange="updateSelectedCount(3)">
+            <label for="240plus" class="checkbox-label">Above 240</label>
+          </div>
+
+        </div>
+      </div>
+
+
+      <script>
+        let isCollapsed = false;
+
+        function toggleDropdown(idx) {
+          const content = document.getElementById('dropdownContent' + idx);
+          const arrow = document.getElementById('dropdownArrow' + idx);
+
+          if (content.classList.contains('expanded')) {
+            // Animate collapse
+            content.style.height = content.scrollHeight + 'px';
+            setTimeout(() => {
+              content.style.height = '0px';
+            }, 10);
+            content.classList.remove('expanded');
+            arrow.classList.remove('expanded');
+            arrow.classList.add('collapsed');
+          } else {
+            // Animate expand
+            content.style.height = content.scrollHeight + 'px';
+            content.classList.add('expanded');
+            arrow.classList.remove('collapsed');
+            arrow.classList.add('expanded');
+            // Remove height after transition to allow for dynamic content
+            content.addEventListener('transitionend', function handler() {
+              if (content.classList.contains('expanded')) {
+                content.style.height = 'auto';
+              }
+              content.removeEventListener('transitionend', handler);
+            });
+          }
+        }
+
+        function updateSelectedCount(idx) {
+          const container = document.getElementById('dropdownContent' + idx);
+          const checkboxes = container.querySelectorAll('.checkbox-input');
+          const selectedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+          const countElement = document.getElementById('selectedCount' + idx);
+
+          if (selectedCount === 0) {
+            countElement.textContent = '(0 selected)';
+          } else if (selectedCount === 1) {
+            countElement.textContent = '(1 selected)';
+          } else {
+            countElement.textContent = `(${selectedCount} selected)`;
+          }
+        }
+      </script>
+
+      <!-- <div id="carousel-banner-0" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="row justify-content-center">
+              <div class="col-12 text-center">
+                <a href="index.php?route=product/manufacturer.info&amp;manufacturer_id=7"><img src="http://localhost/upload/image/cache/catalog/demo/compaq_presario-200x180.jpg" alt="HP Banner" class="img-fluid"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- <script type="text/javascript">
+        $(document).ready(function() {
+          new bootstrap.Carousel(document.querySelector('#carousel-banner-0'), {
+            ride: 'carousel',
+            interval: 5000,
+            wrap: true
+          });
+        });
+      </script> -->
+
+    </aside>
+
+
     <div id="content" class="col">
       {{ content_top }}
-      <h1>{{ heading_title }}</h1>
-      <div class="row">
-        <div class="col"><label for="input-search" class="col-form-label">{{ entry_search }}</label></div>
-      </div>
-      <div class="row row-cols-1 row-cols-md-2">
-        <div class="col mb-3">
-          <input type="text" name="search" value="{{ search }}" placeholder="{{ text_keyword }}" id="input-search" class="form-control mb-1"/>
-          <div class="form-check">
-            <input type="checkbox" name="description" value="1" id="input-description" class="form-check-input"{% if description %} checked{% endif %}/>
-            <label for="input-description" class="form-check-label">{{ entry_description }}</label>
-          </div>
-        </div>
-        <div class="col mb-3">
-          <select name="category_id" id="input-category" class="form-select mb-1">
-            <option value="0">{{ text_category }}</option>
-            {% for category_1 in categories %}
-              <option value="{{ category_1.category_id }}"{% if category_1.category_id == category_id %} selected{% endif %}>{{ category_1.name }}</option>
-              {% for category_2 in category_1.children %}
-                <option value="{{ category_2.category_id }}"{% if category_2.category_id == category_id %} selected{% endif %}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2.name }}</option>
-                {% for category_3 in category_2.children %}
-                  <option value="{{ category_3.category_id }}"{% if category_3.category_id == category_id %} selected{% endif %}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3.name }}</option>
+      
+      <!-- Exact Figma Design Implementation -->
+      <button class="mobile-filter-toggle">Filters</button>
+      <div class="main-container">
+        <div class="middle-container">
+          <!-- Left Column - Filters -->
+          <div class="let-it-hide left-column" style="display: none;">
+            
+            <div class="filter-header-section">
+              <div class="filter-main-title">
+                Filters
+                <span class="filter-count" id="filter-count" style="display: none;"></span>
+              </div>
+              <button class="clear-all-btn" onclick="clearAllFilters()">Clear All</button>
+            </div>
+            
+            
+            <div class="price-section">
+              <div class="price-title">Price Range</div>
+              <div class="price-range-container">
+                <div class="price-range"></div>
+              </div>
+              <div class="price-inputs">
+                <input type="text" class="price-input" name="price_min" value="{{ price_min ? price_min : '' }}" placeholder="Min">
+                <input type="text" class="price-input" name="price_max" value="{{ price_max ? price_max : '' }}" placeholder="Max">
+              </div>
+            </div>
+            
+            
+            <div class="filter-section">
+              <div class="filter-header">
+                <div class="arrow">▼</div>
+                <div class="filter-title">Manufacturer</div>
+              </div>
+              <div class="filter-list">
+                {% if all_manufacturers %}
+                  {% for manufacturer in all_manufacturers %}
+                    <div class="filter-item">
+                      <div class="filter-label">{{ manufacturer.name }}</div>
+                      <div class="filter-checkbox{% if manufacturer.selected %} checked{% endif %}" data-filter="manufacturer" data-value="{{ manufacturer.name }}"></div>
+                    </div>
+                  {% endfor %}
+                {% else %}
+                  <!-- Fallback manufacturers if none from database -->
+                  {% set fallback_manufacturers = ['ASUS', 'Lenovo', 'Acer', 'MSI', 'Dell', 'HP', 'Apple', 'Samsung'] %}
+                  {% for manufacturer in fallback_manufacturers %}
+                    <div class="filter-item">
+                      <div class="filter-label">{{ manufacturer }}</div>
+                      <div class="filter-checkbox{% if manufacturer in manufacturers %} checked{% endif %}" data-filter="manufacturer" data-value="{{ manufacturer }}"></div>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+            
+            
+            <div class="filter-section">
+              <div class="filter-header">
+                <div class="arrow">▼</div>
+                <div class="filter-title">Screen Size</div>
+              </div>
+              <div class="filter-list">
+                {% set screen_size_options = ['15 - 17 inches', '18 - 20 inches', '21 - 24 inches', '25 - 30 inches', '31 - 40 inches', 'Above 40 inches'] %}
+                {% for screen_size in screen_size_options %}
+                  <div class="filter-item">
+                    <div class="filter-label">{{ screen_size }}</div>
+                    <div class="filter-checkbox{% if screen_size in screen_sizes %} checked{% endif %}" data-filter="screen_size" data-value="{{ screen_size }}"></div>
+                  </div>
                 {% endfor %}
-              {% endfor %}
-            {% endfor %}
-          </select>
-          <div class="form-check">
-            <input type="checkbox" name="sub_category" value="1" id="input-sub-category" class="form-check-input"{% if sub_category %} checked{% endif %}/>
-            <label for="input-sub-category" class="form-check-label">{{ text_sub_category }}</label>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col text-end">
-          <button type="button" id="button-search" class="btn btn-primary">{{ button_search }}</button>
-        </div>
-      </div>
-      <hr/>
-      <h2>{{ text_search }}</h2>
-      {% if products %}
-        <div id="display-control" class="row">
-          <div class="col-md-3">
-            <div class="mb-3">
-              <a href="{{ compare }}" id="compare-total" class="btn btn-primary d-block"><i class="fa-solid fa-arrow-right-arrow-left"></i> <span class="d-inline d-md-none d-lg-inline">{{ text_compare }}</span></a>
+              </div>
             </div>
-          </div>
-          <div class="col-md-1 d-none d-md-block">
-            <div class="btn-group">
-              <button type="button" id="button-list" class="btn btn-light" data-bs-toggle="tooltip" title="{{ button_list }}"><i class="fa-solid fa-table-list"></i></button>
-              <button type="button" id="button-grid" class="btn btn-light" data-bs-toggle="tooltip" title="{{ button_grid }}"><i class="fa-solid fa-table-cells"></i></button>
-            </div>
-          </div>
-          <div class="col-md-4 offset-md-1 col-6">
-            <div class="input-group mb-3">
-              <label for="input-sort" class="input-group-text">{{ text_sort }}</label>
-              <select id="input-sort" class="form-select" onchange="location = this.value;">
-                {% for sorts in sorts %}
-                  <option value="{{ sorts.href }}"{% if sorts.value == '%s-%s'|format(sort, order) %} selected{% endif %}>{{ sorts.text }}</option>
+            
+            
+            <div class="filter-section">
+              <div class="filter-header">
+                <div class="arrow">▼</div>
+                <div class="filter-title">Refresh Rate</div>
+              </div>
+              <div class="filter-list">
+                {% set refresh_rate_options = ['60 Hz', '100 Hz', '120 Hz', '144 Hz', '165 Hz', '170 Hz', '180 Hz', '200 Hz', '240 Hz', 'Above 240 Hz'] %}
+                {% for refresh_rate in refresh_rate_options %}
+                  <div class="filter-item">
+                    <div class="filter-label">{{ refresh_rate }}</div>
+                    <div class="filter-checkbox{% if refresh_rate in refresh_rates %} checked{% endif %}" data-filter="refresh_rate" data-value="{{ refresh_rate }}"></div>
+                  </div>
                 {% endfor %}
-              </select>
+              </div>
             </div>
           </div>
-          <div class="col-md-3 col-6">
-            <div class="input-group mb-3">
-              <label for="input-limit" class="input-group-text">{{ text_limit }}</label>
-              <select id="input-limit" class="form-select" onchange="location = this.value;">
-                {% for limits in limits %}
-                  <option value="{{ limits.href }}"{% if limits.value == limit %} selected{% endif %}>{{ limits.text }}</option>
+          
+          <!-- Right Column - Products -->
+          <div class="right-column">
+            <!-- Upper Section - Title and Controls -->
+            <div class="upper-section">
+              <div class="page-title">{{ heading_title }}</div>
+              <div class="controls-right">
+                <div class="show-control">
+                  <div class="control-label">Show:</div>
+                  <select class="control-select" id="limit-select">
+                    {% if limits %}
+                      {% for limit_option in limits %}
+                        <option value="{{ limit_option.value }}"{% if limit_option.value == limit %} selected{% endif %}>{{ limit_option.text }}</option>
+                      {% endfor %}
+                    {% endif %}
+                  </select>
+                </div>
+                <div class="sort-control">
+                  <div class="control-label">Sort by:</div>
+                  <select class="control-select" id="sort-select">
+                    {% if sorts %}
+                      {% for sort_option in sorts %}
+                        <option value="{{ sort_option.value }}"{% if sort_option.value == (sort ~ '-' ~ order) %} selected{% endif %}>{{ sort_option.text }}</option>
+                      {% endfor %}
+                    {% endif %}
+                  </select>
+                </div>
+          </div>
+            </div>
+            
+            <!-- Products Grid -->
+            <div class="products-grid">
+              {% if products %}
+                {% for product in products %}
+                  <div class="product-card">{{ product }}</div>
                 {% endfor %}
-              </select>
+              {% else %}
+                <div class="no-results">
+                  <h3>No Results Found</h3>
+                  <p>{{ text_no_results }}</p>
+                </div>
+              {% endif %}
+            </div>
+            
+            <!-- Lower Section - Pagination -->
+            <div class="lower-section">
+              {% if pagination %}
+                <div class="pagination">{{ pagination }}</div>
+              {% endif %}
+              {% if results %}
+                <div class="results-info">{{ results }}</div>
+              {% endif %}
             </div>
           </div>
         </div>
-        <div id="product-list" class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4">
-          {% for product in products %}
-            <div class="col mb-3">{{ product }}</div>
-          {% endfor %}
         </div>
-        <div class="row">
-          <div class="col-sm-6 text-start">{{ pagination }}</div>
-          <div class="col-sm-6 text-end">{{ results }}</div>
-        </div>
-      {% else %}
-        <p>{{ text_no_results }}</p>
-      {% endif %}
+      
       {{ content_bottom }}
     </div>
     {{ column_right }}
   </div>
 </div>
 <script type="text/javascript"><!--
-$('#button-search').bind('click', function() {
-    url = 'index.php?route=product/search&language={{ language }}';
+// Figma Design JavaScript Functionality
 
-    var search = $('#input-search').val();
-
-    if (search) {
-        url += '&search=' + encodeURIComponent(search);
-    }
-
-    var category_id = $('#input-category').prop('value');
-
-    if (category_id > 0) {
-        url += '&category_id=' + encodeURIComponent(category_id);
-    }
-
-    var sub_category = $('#input-sub-category:checked').prop('value');
-
-    if (sub_category) {
-        url += '&sub_category=1';
-    }
-
-    var description = $('#input-description:checked').prop('value');
-
-    if (description) {
-        url += '&description=1';
-    }
-
-    location = url;
+// Filter checkbox functionality
+$(document).ready(function() {
+    // Handle filter checkbox clicks
+    $('.filter-checkbox').on('click', function() {
+        $(this).toggleClass('checked');
+        updateFilterCount();
+        // Add filter logic here
+        applyFilters();
+    });
+    
+    // Handle filter section collapse/expand
+    $('.filter-header .arrow').on('click', function() {
+        var section = $(this).closest('.filter-section');
+        var list = section.find('.filter-list');
+        var arrow = $(this);
+        
+        if (list.is(':visible')) {
+            list.slideUp(200);
+            arrow.addClass('collapsed').text('▶');
+        } else {
+            list.slideDown(200);
+            arrow.removeClass('collapsed').text('▼');
+        }
+    });
+    
+    // Price range input handling with debounce
+    var priceTimeout;
+    $('.price-input').on('input', function() {
+        clearTimeout(priceTimeout);
+        priceTimeout = setTimeout(function() {
+            updateFilterCount();
+            applyFilters();
+        }, 1000);
+    });
+    
+    // Initialize filter count on page load
+    updateFilterCount();
+    
+    // Sort and show controls
+    $('#limit-select').on('change', function() {
+        var url = updateUrlParameter(window.location.href, 'limit', $(this).val());
+        window.location.href = url;
+    });
+    
+    $('#sort-select').on('change', function() {
+        var sortValue = $(this).val().split('-');
+        var url = updateUrlParameter(window.location.href, 'sort', sortValue[0]);
+        url = updateUrlParameter(url, 'order', sortValue[1]);
+        window.location.href = url;
+    });
+    
+    // Pagination links
+    $('.pagination a').on('click', function(e) {
+        e.preventDefault();
+        var href = $(this).attr('href');
+        if (href && href !== '#') {
+            window.location.href = href;
+        }
+    });
 });
 
-$('#input-search').bind('keydown', function(e) {
-    if (e.keyCode == 13) {
-        $('#button-search').trigger('click');
+// Apply filters function
+function applyFilters() {
+    var filters = {
+        priceMin: $('input[name="price_min"]').val(),
+        priceMax: $('input[name="price_max"]').val(),
+        manufacturers: [],
+        screenSizes: [],
+        refreshRates: []
+    };
+    
+    // Collect checked manufacturers
+    $('.filter-checkbox[data-filter="manufacturer"].checked').each(function() {
+        filters.manufacturers.push($(this).data('value'));
+    });
+    
+    // Collect checked screen sizes
+    $('.filter-checkbox[data-filter="screen_size"].checked').each(function() {
+        filters.screenSizes.push($(this).data('value'));
+    });
+    
+    // Collect checked refresh rates
+    $('.filter-checkbox[data-filter="refresh_rate"].checked').each(function() {
+        filters.refreshRates.push($(this).data('value'));
+    });
+    
+    // Build URL with filters
+    var url = 'index.php?route=product/search&language={{ language }}';
+    
+    // Add existing search parameters
+    {% if search %}
+        url += '&search=' + encodeURIComponent('{{ search }}');
+    {% endif %}
+    
+    {% if category_id %}
+        url += '&category_id={{ category_id }}';
+    {% endif %}
+    
+    // Add filter parameters
+    if (filters.priceMin && filters.priceMin !== '0') url += '&price_min=' + encodeURIComponent(filters.priceMin);
+    if (filters.priceMax && filters.priceMax !== '0') url += '&price_max=' + encodeURIComponent(filters.priceMax);
+    if (filters.manufacturers.length) url += '&manufacturers=' + encodeURIComponent(filters.manufacturers.join(','));
+    if (filters.screenSizes.length) url += '&screen_sizes=' + encodeURIComponent(filters.screenSizes.join(','));
+    if (filters.refreshRates.length) url += '&refresh_rates=' + encodeURIComponent(filters.refreshRates.join(','));
+    
+    // Reload page with filters
+    window.location.href = url;
+}
+
+// Clear all filters function
+function clearAllFilters() {
+    // Clear all checkboxes
+    $('.filter-checkbox').removeClass('checked');
+    
+    // Clear price inputs
+    $('.price-input').val('');
+    
+    // Build clean URL without filters
+    var url = 'index.php?route=product/search&language={{ language }}';
+    
+    // Add existing search parameters
+    {% if search %}
+        url += '&search=' + encodeURIComponent('{{ search }}');
+    {% endif %}
+    
+    {% if category_id %}
+        url += '&category_id={{ category_id }}';
+    {% endif %}
+    
+    // Reload page without filters
+    window.location.href = url;
+}
+
+// Update filter count function
+function updateFilterCount() {
+    var activeFilters = 0;
+    
+    // Count checked checkboxes
+    activeFilters += $('.filter-checkbox.checked').length;
+    
+    // Count price filters
+    if ($('input[name="price_min"]').val() && $('input[name="price_min"]').val() !== '0') activeFilters++;
+    if ($('input[name="price_max"]').val() && $('input[name="price_max"]').val() !== '0') activeFilters++;
+    
+    // Update filter count display
+    var filterCountEl = $('#filter-count');
+    if (activeFilters > 0) {
+        filterCountEl.text('(' + activeFilters + ')').show();
+    } else {
+        filterCountEl.hide();
+    }
+}
+
+// Utility function to update URL parameters
+function updateUrlParameter(url, param, paramVal) {
+    var newAdditionalURL = "";
+    var tempArray = url.split("?");
+    var baseURL = tempArray[0];
+    var additionalURL = tempArray[1];
+    var temp = "";
+    
+    if (additionalURL) {
+        tempArray = additionalURL.split("&");
+        for (var i = 0; i < tempArray.length; i++) {
+            if (tempArray[i].split('=')[0] != param) {
+                newAdditionalURL += temp + tempArray[i];
+                temp = "&";
+            }
+        }
+    }
+    
+    var rows_txt = temp + "" + param + "=" + paramVal;
+    return baseURL + "?" + newAdditionalURL + rows_txt;
+}
+
+// Mobile responsive adjustments
+$(window).on('resize', function() {
+    var windowWidth = $(window).width();
+    
+    if (windowWidth < 768) {
+        // Mobile adjustments
+        $('.left-column').addClass('mobile-collapsed');
+    } else {
+        $('.left-column').removeClass('mobile-collapsed');
     }
 });
 
-$('#input-category').on('change', function() {
-    $('#input-sub-category').prop('disabled', (this.value == '0' ? true : false));
+// Initialize mobile state
+$(document).ready(function() {
+    if ($(window).width() < 768) {
+        $('.left-column').addClass('mobile-collapsed');
+    }
 });
 
-$('#input-category').trigger('change');
+// Touch-friendly interactions for mobile
+$(document).ready(function() {
+    // Mobile filter toggle
+    $('.mobile-filter-toggle').on('click', function() {
+        $('.left-column').toggleClass('show');
+    });
+    
+    // Close mobile filters when clicking outside
+    $(document).on('click', function(e) {
+        if ($(window).width() < 768) {
+            if (!$(e.target).closest('.left-column, .mobile-filter-toggle').length) {
+                $('.left-column').removeClass('show');
+            }
+        }
+    });
+    
+    // Add touch feedback to filter items
+    $('.filter-item').on('touchstart', function() {
+        $(this).addClass('touch-active');
+    });
+    
+    $('.filter-item').on('touchend', function() {
+        $(this).removeClass('touch-active');
+    });
+    
+    // Prevent zoom on input focus (iOS)
+    $('input[type="text"], select').on('focus', function() {
+        if ($(window).width() < 768) {
+            $('meta[name="viewport"]').attr('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+        }
+    });
+    
+    $('input[type="text"], select').on('blur', function() {
+        $('meta[name="viewport"]').attr('content', 'width=device-width, initial-scale=1');
+    });
+});
 //--></script>
-{{ footer }}
+<!-- {{ footer }} -->
