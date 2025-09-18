@@ -306,19 +306,17 @@
 
   <div class="content">
     {% if price %}
-      <div class="price">
-        
-          <span class="price-new">{{ price }}</span>
-        
-          <span class="price-new">{{ special }}</span>
-          <span class="price-old">{{ price }}</span>
-        {#
-        {% if tax %}
-          <div style="font-size: 12px; color: #666; margin-top: 4px;">{{ text_tax }} {{ tax }}</div>
-        {% endif %}
-        #}
-      </div>
+  <div class="price">
+    {% if special and special != price %}
+      {# Product has a special price different from regular price #}
+      <span class="price-new">{{ special }}</span>
+      <span class="price-old">{{ price }}</span>
+    {% else %}
+      {# No special price or special price same as regular price #}
+      <span class="price-new">{{ price }}</span>
     {% endif %}
+  </div>
+{% endif %}
 
     {% if review_status and rating %}
       <div class="rating">
