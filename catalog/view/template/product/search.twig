@@ -585,25 +585,43 @@ vertical-align: middle;
 }
 
 .control-select {
-  background: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  padding: 2px 8px;
+  height: 24px;
+  background: rgba(233, 239, 246, 1);
+  border: 0;
+  border-radius: 5px;
+  padding-left: 10px;
   font-family: 'Montserrat', sans-serif;
+  gap: 3px;
   font-weight: 500;
-  font-size: 7px;
-  color: #1f1f1f;
+  font-size: 10px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  color: rgba(31, 31, 31, 1);
   min-width: 40px;
   position: relative;
+
+  -webkit-appearance: none; /* For Safari and Chrome */
+  -moz-appearance: none;    /* For Firefox */
+  appearance: none;         /* Standard property */
+  /* Optional: adjust padding or text-indent */
+  padding-right: 20px; /* Make space for your custom arrow */
+
+  position: relative; /* Essential for positioning the arrow */
+  display: inline-block; /* Or block, depending on layout */
 }
 
 .control-select::after {
-  content: '▼';
+  content: '';
   position: absolute;
-  right: 4px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 6px;
+  width: 12px;
+  height: 12px;
+  background-image: url('/image/arrow.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
   pointer-events: none;
 }
 
